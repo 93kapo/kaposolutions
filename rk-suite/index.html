@@ -191,6 +191,8 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
   .rv,.w{opacity:1!important;transform:none!important;filter:none!important}
   .curve .ln{stroke-dashoffset:0!important}
 }
+.vid{position:relative;max-width:980px;margin:34px auto 0;border-radius:22px;overflow:hidden;border:1px solid #262932;background:#000;box-shadow:0 40px 90px -40px rgba(183,243,107,.25)}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
 </style>
 </head>
 <body>
@@ -231,6 +233,13 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
       <div class="strip"><div class="film" id="film"></div><div class="mark"></div></div>
       <p class="demo-cap" data-i="cap">Dibujas la curva. Tu clip acelera y frena justo donde quieres.</p>
     </div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="wrap">
+    <div class="sec-h rv"><div class="eyebrow"><span data-i="v_e">Míralo en acción</span></div><h2 data-i="v_h">30 segundos para entenderlo todo.</h2></div>
+    <div class="vid rv"><video controls preload="none" playsinline poster="rk-suite-promo.jpg" aria-label="RK SUITE: anuncio de 30 segundos"><source src="rk-suite-promo.mp4" type="video/mp4"></video></div>
   </div>
 </section>
 
@@ -333,7 +342,7 @@ var CHECKOUT_URL = "";   // p. ej. "https://tutienda.lemonsqueezy.com/checkout/b
 var SUPPORT = "alexanderpineda07@gmail.com";
 
 var T = {
-es:{ai_e:"Búsqueda inteligente",ai_h:"Escribe lo que buscas. Encuentra el momento exacto.",ai_p:"Olvídate de ver horas de material. Describe la escena con tus palabras y RK SUITE te lleva al cuadro en tus clips.",ai_c1:"100 % en tu Mac",ai_c2:"Complemento opcional",ai_c3:"Experimental",ai_pw:"Impulsado por EmbeddingGemma 2",ai_pws:"Modelo abierto de Google DeepMind (licencia Apache 2.0) que corre en tu propio Mac.",ai_f:"Ejemplo ilustrativo. Tus videos se analizan en tu computadora y nada se sube a internet.",attr:"EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.",n1:"Qué hace",n2:"Cómo se usa",n3:"Precio",n4:"Preguntas",eyebrow:"Para DaVinci Resolve Studio · Mac con Apple Silicon",
+es:{v_e:"Míralo en acción",v_h:"30 segundos para entenderlo todo.",ai_e:"Búsqueda inteligente",ai_h:"Escribe lo que buscas. Encuentra el momento exacto.",ai_p:"Olvídate de ver horas de material. Describe la escena con tus palabras y RK SUITE te lleva al cuadro en tus clips.",ai_c1:"100 % en tu Mac",ai_c2:"Complemento opcional",ai_c3:"Experimental",ai_pw:"Impulsado por EmbeddingGemma 2",ai_pws:"Modelo abierto de Google DeepMind (licencia Apache 2.0) que corre en tu propio Mac.",ai_f:"Ejemplo ilustrativo. Tus videos se analizan en tu computadora y nada se sube a internet.",attr:"EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.",n1:"Qué hace",n2:"Cómo se usa",n3:"Precio",n4:"Preguntas",eyebrow:"Para DaVinci Resolve Studio · Mac con Apple Silicon",
  h1:"Speed ramps, subtítulos y música. En un clic.",lead:"RK SUITE convierte horas de edición en segundos. Hecho por un editor, pensado para que cualquiera lo entienda.",
  buy:"Comprar · 49.99 USD",buyw:"Ver precio · 49.99 USD",how:"Ver qué hace",t1:"Pago único, sin suscripción",t2:"Licencia para 2 Macs",t3:"Todo se procesa en tu Mac",cap:"Dibujas la curva. Tu clip acelera y frena justo donde quieres.",
  m_e:"Cuatro módulos",m_h:"Todo lo que necesitas. Nada que te estorbe.",m_p:"Cada módulo hace una cosa y tiene un botón verde. Lo demás está escondido hasta que lo necesites.",
@@ -352,7 +361,7 @@ es:{ai_e:"Búsqueda inteligente",ai_h:"Escribe lo que buscas. Encuentra el momen
  q4:"¿Qué pasa si cambio de Mac?",a4:"Tu llave sirve en 2 Macs. Desactiva uno desde el plugin y activa el nuevo cuando quieras.",
  q5:"macOS dice que no puede verificar el instalador",a5:"Es normal la primera vez: el instalador no está firmado con una cuenta de desarrollador de Apple. Ve a Ajustes del Sistema › Privacidad y seguridad, baja hasta el aviso del instalador y pulsa «Abrir de todos modos». Solo se pide una vez.",
  q6:"¿Cómo recibo ayuda?",a6:"Escríbenos a",a6b:"Respondemos personalmente.",fo:"Hecho en Guatemala por REDKAM",l1:"Términos de uso",l2:"Privacidad",l3:"Reembolsos"},
-en:{ai_e:"Smart search",ai_h:"Type what you are looking for. Find the exact moment.",ai_p:"Stop watching hours of footage. Describe the scene in your own words and RK SUITE takes you to the frame in your clips.",ai_c1:"100% on your Mac",ai_c2:"Optional add-on",ai_c3:"Experimental",ai_pw:"Powered by EmbeddingGemma 2",ai_pws:"Open model from Google DeepMind (Apache 2.0 license) running on your own Mac.",ai_f:"Illustrative example. Your videos are analyzed on your computer and nothing is uploaded to the internet.",attr:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",n1:"What it does",n2:"How it works",n3:"Price",n4:"FAQ",eyebrow:"For DaVinci Resolve Studio · Apple Silicon Mac",
+en:{v_e:"See it in action",v_h:"30 seconds to get it all.",ai_e:"Smart search",ai_h:"Type what you are looking for. Find the exact moment.",ai_p:"Stop watching hours of footage. Describe the scene in your own words and RK SUITE takes you to the frame in your clips.",ai_c1:"100% on your Mac",ai_c2:"Optional add-on",ai_c3:"Experimental",ai_pw:"Powered by EmbeddingGemma 2",ai_pws:"Open model from Google DeepMind (Apache 2.0 license) running on your own Mac.",ai_f:"Illustrative example. Your videos are analyzed on your computer and nothing is uploaded to the internet.",attr:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",n1:"What it does",n2:"How it works",n3:"Price",n4:"FAQ",eyebrow:"For DaVinci Resolve Studio · Apple Silicon Mac",
  h1:"Speed ramps, subtitles and music. In one click.",lead:"RK SUITE turns hours of editing into seconds. Made by an editor, designed so anyone can understand it.",
  buy:"Buy · 49.99 USD",buyw:"See price · 49.99 USD",how:"See what it does",t1:"One-time payment, no subscription",t2:"License for 2 Macs",t3:"Everything runs on your Mac",cap:"You draw the curve. Your clip speeds up and slows down exactly where you want.",
  m_e:"Four modules",m_h:"Everything you need. Nothing in your way.",m_p:"Each module does one thing and has one green button. The rest stays hidden until you need it.",

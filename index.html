@@ -53,6 +53,8 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding:30px 0 50px;colo
 .rv.in{opacity:1;transform:none}
 @media (max-width:640px){.card{grid-template-columns:auto 1fr}.card .tag{grid-column:1/-1;justify-self:start}nav a{margin-left:16px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bg video{display:none}}
+.vid{position:relative;max-width:980px;margin:34px auto 0;border-radius:22px;overflow:hidden;border:1px solid #262932;background:#000;box-shadow:0 40px 90px -40px rgba(183,243,107,.25)}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
 </style>
 </head>
 <body>
@@ -63,7 +65,7 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding:30px 0 50px;colo
 <div class="wrap">
   <header>
     <a class="brand" href="/"><img src="favicon.svg" alt="" width="32" height="32"><span>Kapo Solutions</span></a>
-    <nav><a href="#productos">Productos</a><a href="#nosotros">Sobre mí</a><a href="mailto:alexanderpineda07@gmail.com">Contacto</a></nav>
+    <nav><a href="#video">Video</a><a href="#productos">Productos</a><a href="#nosotros">Sobre mí</a><a href="mailto:alexanderpineda07@gmail.com">Contacto</a></nav>
   </header>
   <main>
     <div class="hero">
@@ -72,6 +74,10 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding:30px 0 50px;colo
       <p class="lead rv">Construimos plugins que automatizan lo repetitivo de la edición de video: rampas de velocidad, subtítulos y música. Hechos por un editor, para editores.</p>
       <a class="cta rv" href="rk-suite/">Conocer RK SUITE <span aria-hidden="true">→</span></a>
     </div>
+    <section id="video">
+      <h2 class="rv">Míralo en acción</h2>
+      <div class="vid rv"><video controls preload="none" playsinline poster="rk-suite/rk-suite-promo.jpg" aria-label="RK SUITE: anuncio de 30 segundos"><source src="rk-suite/rk-suite-promo.mp4" type="video/mp4"></video></div>
+    </section>
     <section id="productos">
       <h2 class="rv">Productos</h2>
       <a class="card rv" href="rk-suite/">
