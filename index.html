@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kapo Solutions · Herramientas para editores de video</title>
+<meta name="description" content="Kapo Solutions crea herramientas para editores de video. Producto actual: RK SUITE, plugin para DaVinci Resolve y Adobe Premiere Pro en Mac.">
+<meta name="theme-color" content="#0E0F13">
+<meta property="og:title" content="Kapo Solutions · Herramientas para editores de video">
+<meta property="og:description" content="Plugins que ahorran horas de edición. Producto actual: RK SUITE para DaVinci Resolve y Premiere Pro.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kaposolutions.com/">
+<meta property="og:image" content="https://kaposolutions.com/rk-suite/logo.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://kaposolutions.com/">
+<style>
+:root{--bg:#0E0F13;--panel:#181A21;--line:#262932;--txt:#F5F5F7;--mut:#9599A5;--lime:#B7F36B;--ease:cubic-bezier(.22,1,.36,1);--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",system-ui,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font:17px/1.6 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:8px}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(60% 50% at 70% 20%,rgba(183,243,107,.10),transparent 70%),radial-gradient(50% 45% at 15% 80%,rgba(120,160,255,.08),transparent 70%),var(--bg)}
+.bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,19,.55),var(--bg) 92%)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-.01em}
+.brand img{width:32px;height:32px;border-radius:8px}
+nav a{color:var(--mut);margin-left:24px;font-size:15px;transition:color .25s var(--ease)}
+nav a:hover{color:var(--txt)}
+.hero{padding:12vh 0 8vh}
+.eyebrow{font:600 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
+h1{font-size:clamp(40px,7.4vw,84px);line-height:1.04;letter-spacing:-.03em;max-width:14ch}
+h1 em{font-style:normal;color:var(--lime)}
+.lead{color:var(--mut);font-size:clamp(17px,2vw,21px);max-width:560px;margin-top:22px}
+.cta{display:inline-flex;gap:10px;align-items:center;margin-top:34px;padding:14px 24px;border-radius:999px;background:var(--lime);color:#0b0d08;font-weight:650;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.cta:hover{transform:translateY(-2px);box-shadow:0 12px 34px -10px rgba(183,243,107,.6)}
+section{padding:56px 0}
+h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-.02em;margin-bottom:26px}
+.card{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent),var(--panel);transition:transform .4s var(--ease),border-color .3s}
+.card:hover{transform:translateY(-3px);border-color:#3a3e4a}
+.card img{width:64px;height:64px;border-radius:16px}
+.card h3{font-size:22px;letter-spacing:-.01em}
+.card p{color:var(--mut);font-size:16px;margin-top:4px}
+.tag{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(183,243,107,.35);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.soon{margin-top:16px;color:var(--mut);font-size:15px}
+.about p{color:var(--mut);max-width:640px;margin-bottom:14px}
+.about a,.foot a{color:var(--lime)}
+footer{border-top:1px solid var(--line);margin-top:48px;padding:30px 0 50px;color:var(--mut);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:640px){.card{grid-template-columns:auto 1fr}.card .tag{grid-column:1/-1;justify-self:start}nav a{margin-left:16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bg video{display:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <!-- Fondo en bucle: cuando exista bg-loop.mp4 se activa solo -->
+  <video id="bgv" muted loop playsinline preload="none" poster="" data-src="bg-loop.mp4"></video>
+</div>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/"><img src="favicon.svg" alt="" width="32" height="32"><span>Kapo Solutions</span></a>
+    <nav><a href="#productos">Productos</a><a href="#nosotros">Sobre mí</a><a href="mailto:alexanderpineda07@gmail.com">Contacto</a></nav>
+  </header>
+  <main>
+    <div class="hero">
+      <p class="eyebrow rv">Herramientas para editores</p>
+      <h1 class="rv">Menos tiempo editando. <em>Más tiempo creando.</em></h1>
+      <p class="lead rv">Construimos plugins que automatizan lo repetitivo de la edición de video: rampas de velocidad, subtítulos y música. Hechos por un editor, para editores.</p>
+      <a class="cta rv" href="rk-suite/">Conocer RK SUITE <span aria-hidden="true">→</span></a>
+    </div>
+    <section id="productos">
+      <h2 class="rv">Productos</h2>
+      <a class="card rv" href="rk-suite/">
+        <img src="rk-suite/logo.png" alt="" width="64" height="64">
+        <div><h3>RK SUITE</h3><p>Speed ramps, subtítulos, beats y mezclas de música en un clic. Para DaVinci Resolve Studio y Adobe Premiere Pro en Mac.</p></div>
+        <span class="tag">Beta</span>
+      </a>
+      <p class="soon rv">Más herramientas en camino.</p>
+    </section>
+    <section id="nosotros" class="about">
+      <h2 class="rv">Sobre mí</h2>
+      <p class="rv">Soy Kapo, editor de video desde Quetzaltenango, Guatemala. Empecé RK SUITE para resolver mis propios cuellos de botella y la comparto con quien edita como yo.</p>
+      <p class="rv">¿Dudas, ideas o quieres probarla? Escríbeme a <a href="mailto:alexanderpineda07@gmail.com">alexanderpineda07@gmail.com</a>. Respondo personalmente.</p>
+    </section>
+  </main>
+  <footer><div class="foot"><span>© 2026 Kapo Solutions</span><span><a href="rk-suite/terminos.html">Términos</a> · <a href="rk-suite/privacidad.html">Privacidad</a> · <a href="rk-suite/reembolso.html">Reembolsos</a></span></div></footer>
+</div>
+<script>
+(function(){
+  var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.15});
+  document.querySelectorAll(".rv").forEach(function(el,i){el.style.transitionDelay=(i%4)*70+"ms";io.observe(el)});
+  var v=document.getElementById("bgv");
+  if(v&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+    fetch(v.dataset.src,{method:"HEAD"}).then(function(r){if(r.ok){v.src=v.dataset.src;v.play().catch(function(){})}}).catch(function(){});
+  }
+})();
+</script>
+</body>
+</html>
