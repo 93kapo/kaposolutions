@@ -615,14 +615,15 @@ document.querySelectorAll(".q button").forEach(function(b){b.addEventListener("c
   var ln=el("ln"),dot=el("dot"),area=el("area"),spd=el("spd"),film=el("film");
   var L=ln.getTotalLength();ln.style.strokeDasharray=L;ln.style.strokeDashoffset=reduced?0:L;
   if(reduced){area.style.opacity=1;dot.setAttribute("cx",0)}
-  var start=performance.now(),draw=1600,loop=7000,x=0,visible=true;
-  var vio=("IntersectionObserver" in window)?new IntersectionObserver(function(e){visible=e[0].isIntersecting}):null;if(vio)vio.observe(film);
+  var el_=0,draw=1600,loop=7000,x=0,visible=true;
+  var box=film.closest(".demo")||film.parentNode.parentNode;
+  var vio=("IntersectionObserver" in window)?new IntersectionObserver(function(e){visible=e[0].isIntersecting},{threshold:.35}):null;if(vio)vio.observe(box);
   function speedAt(y){var k=(190-y)/(190-28);return 0.3+k*3.7} // 0.3× abajo, 4× arriba
-  var last=start;
+  var last=performance.now();
   function frame(t){
     requestAnimationFrame(frame);if(!visible||document.hidden){last=t;return}
     var dt=Math.min(64,t-last);last=t;
-    var e=t-start;
+    el_+=dt;var e=el_;
     if(e<draw){var k=1-Math.pow(1-e/draw,3);ln.style.strokeDashoffset=L*(1-k);area.style.opacity=k*.9}
     else{ln.style.strokeDashoffset=0;area.style.opacity=.9}
     var ph=((e-draw*.4)%loop)/loop;if(ph<0)ph=0;
