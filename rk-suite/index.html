@@ -2,207 +2,180 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
+<script>document.documentElement.className+=" js"</script>
 <title>RK SUITE · Speed ramps, subtítulos, música y búsqueda con IA para DaVinci Resolve y Premiere Pro</title>
 <meta name="description" content="RK SUITE es el plugin para DaVinci Resolve Studio y Premiere Pro (beta) con speed ramps, subtítulos, marcadores de beats, música, sonidos y búsqueda con IA EmbeddingGemma 2, 100 % local. Pago único para 2 Macs.">
-<meta name="theme-color" content="#0E0F13">
+<meta name="theme-color" content="#111216">
 <meta property="og:title" content="RK SUITE · Speed ramps, subtítulos, música y búsqueda con IA">
 <meta property="og:description" content="Speed ramps, subtítulos, música, sonidos y búsqueda con IA 100 % local. Plugin para DaVinci Resolve y Premiere Pro en Mac. 49.99 USD, pago único.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="logo.png">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <style>
-@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
 :root{
-  --bg:#0E0F13;--bg2:#14161C;--panel:#181A21;--line:#262932;--txt:#F5F5F7;--mut:#9599A5;--lime:#B7F36B;--lime2:#8fd94a;--ink:#0b0d08;
+  --bg:#111216;--bg2:#16181d;--panel:#1B1D23;--panel2:#15171c;--line:#2a2d36;--txt:#F5F5F7;--mut:#9599A5;--lime:#B7F36B;--ink:#0b0d08;--edge:#3a4a28;
   --m-fast:140ms;--m-base:260ms;--m-slow:640ms;--ease:cubic-bezier(.22,1,.36,1);--spring:cubic-bezier(.34,1.56,.64,1);
-  --r:18px;--max:1120px;
+  --r:18px;--max:1120px;--hd:64px;
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",system-ui,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--txt);font:17px/1.6 var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+body{background:var(--bg);color:var(--txt);font:16px/1.6 var(--font);min-height:100vh;min-height:100svh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html.menu-open,html.menu-open body{overflow:hidden}
+a{color:inherit;text-decoration:none;touch-action:manipulation}
+button{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;background:none;border:0;border-radius:0;text-align:left;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+img,svg,video{max-width:100%}
 :focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:8px}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-section{position:relative;padding:112px 0}
-h1,h2,h3{line-height:1.08;letter-spacing:-.025em;font-weight:700}
-h1{font-size:clamp(40px,7vw,84px)}
-h2{font-size:clamp(30px,4.6vw,52px);margin-bottom:16px}
-h3{font-size:21px;letter-spacing:-.01em}
-.lead{color:var(--mut);font-size:clamp(17px,2vw,21px);max-width:640px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
-.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(183,243,107,.6);animation:pulse 2.4s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(183,243,107,0)}100%{box-shadow:0 0 0 0 rgba(183,243,107,0)}}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px;padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+section{position:relative;padding:72px 0;scroll-margin-top:calc(var(--hd) + env(safe-area-inset-top))}
+h1,h2,h3{line-height:1.1;letter-spacing:-.025em;font-weight:700;overflow-wrap:break-word}
+h1{font-size:clamp(34px,8.4vw,72px)}
+h2{font-size:clamp(26px,4vw,42px);margin-bottom:12px}
+h3{font-size:19px;letter-spacing:-.01em}
+.lead{color:var(--mut);font-size:clamp(16px,2vw,19px);max-width:620px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;max-width:100%}
+.eyebrow i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--lime);position:relative}
+.eyebrow i::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;background:var(--lime);animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(3);opacity:0}}
+.sec-h{max-width:720px;margin-bottom:32px}
 
 /* cabecera */
-header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background var(--m-base),backdrop-filter var(--m-base),border-color var(--m-base);border-bottom:1px solid transparent}
-header.s{background:rgba(14,15,19,.72);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-color:var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-.01em}
-.brand img{width:34px;height:34px;transition:transform var(--m-base) var(--spring)}
-.brand:hover img{transform:rotate(-8deg) scale(1.08)}
-.nav nav{display:flex;align-items:center;gap:6px}
-.nav nav a{padding:8px 14px;border-radius:999px;color:var(--mut);font-size:15px;transition:color var(--m-fast),background var(--m-fast)}
-.nav nav a:hover{color:var(--txt);background:rgba(255,255,255,.06)}
-.lang{border:1px solid var(--line);background:transparent;color:var(--txt);font:600 13px var(--mono);padding:8px 12px;border-radius:999px;cursor:pointer;transition:border-color var(--m-fast),transform var(--m-fast) var(--spring)}
-.lang:hover{border-color:var(--lime)}.lang:active{transform:scale(.94)}
+.skip{position:absolute;left:-999px;top:0}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top);border-bottom:1px solid transparent;transition:background-color var(--m-base),border-color var(--m-base)}
+header.s,header.mo{background:rgba(17,18,22,.88);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:var(--hd);gap:10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;min-height:44px}
+.brand img{width:32px;height:32px;transition:transform var(--m-base) var(--spring)}
+.nav nav{display:flex;align-items:center;gap:4px}
+.nav nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;color:var(--mut);font-size:15px;transition:color var(--m-fast),background-color var(--m-fast)}
+.lang{min-width:48px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--txt);font:600 13px var(--mono);padding:0 14px;border-radius:999px;margin-left:6px;text-align:center;transition:border-color var(--m-fast),transform var(--m-fast) var(--spring)}
+.lang:active{transform:scale(.94)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);position:relative;margin-left:2px}
+.burger i{position:absolute;left:13px;right:13px;height:2px;border-radius:2px;background:var(--txt);transition:transform .3s var(--ease),opacity .2s}
+.burger i:nth-child(1){top:16px}.burger i:nth-child(2){top:21px}.burger i:nth-child(3){top:26px}
+.menu-open .burger i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.menu-open .burger i:nth-child(2){opacity:0}
+.menu-open .burger i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+#prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:var(--lime);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.mnav{position:fixed;top:0;left:0;right:0;bottom:0;z-index:40;background:#111216;padding:calc(var(--hd) + env(safe-area-inset-top) + 16px) max(24px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:6px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;visibility:hidden;opacity:0;transition:opacity .28s var(--ease),visibility 0s linear .28s}
+.menu-open .mnav{visibility:visible;opacity:1;transition-delay:0s}
+.mnav a.ml{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 4px;border-bottom:1px solid var(--line);font-size:24px;font-weight:650;letter-spacing:-.02em;opacity:0;transform:translateY(14px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.mnav a.ml::after{content:"→";color:var(--lime);font-weight:500}
+.menu-open .mnav a.ml{opacity:1;transform:none}
+.menu-open .mnav a.ml:nth-child(2){transition-delay:.05s}.menu-open .mnav a.ml:nth-child(3){transition-delay:.1s}.menu-open .mnav a.ml:nth-child(4){transition-delay:.15s}
+.mnav .btn{margin-top:22px}
 
 /* botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:999px;font:600 17px var(--font);cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--txt);position:relative;overflow:hidden;transition:transform var(--m-base) var(--spring),box-shadow var(--m-base),border-color var(--m-fast),background var(--m-fast)}
-.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0) scale(.97)}
-.btn.p{background:var(--lime);color:var(--ink);border-color:var(--lime);box-shadow:0 10px 40px -10px rgba(183,243,107,.55)}
-.btn.p:hover{box-shadow:0 16px 54px -8px rgba(183,243,107,.75)}
-.btn.p::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);animation:shine 4.5s var(--ease) 1.6s infinite}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 26px;border-radius:999px;font:600 16px/1.2 var(--font);text-align:center;border:1px solid var(--line);color:var(--txt);position:relative;overflow:hidden;transition:transform var(--m-base) var(--spring),box-shadow var(--m-base),border-color var(--m-fast),background-color var(--m-fast)}
+.btn:active{transform:scale(.97)}
+.btn.p{background:var(--lime);color:var(--ink);border-color:var(--lime);box-shadow:0 8px 28px -10px rgba(183,243,107,.5)}
+.btn.p::after{content:"";position:absolute;top:0;bottom:0;left:0;right:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-120%);animation:shine 4.5s var(--ease) 1.6s infinite}
 @keyframes shine{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-.btn.g:hover{border-color:var(--lime);background:rgba(183,243,107,.06)}
-.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 
 /* hero */
-.hero{padding:150px 0 70px;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;will-change:transform}
-.o1{width:520px;height:520px;background:radial-gradient(circle,#B7F36B66,transparent 70%);top:-120px;right:-120px;animation:float1 16s ease-in-out infinite}
-.o2{width:480px;height:480px;background:radial-gradient(circle,#5ab0ff44,transparent 70%);bottom:-200px;left:-160px;animation:float2 20s ease-in-out infinite}
-@keyframes float1{50%{transform:translate(-60px,50px) scale(1.15)}}
-@keyframes float2{50%{transform:translate(70px,-40px) scale(1.1)}}
-.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.28;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%)}
+.hero{padding:calc(var(--hd) + env(safe-area-inset-top) + 48px) 0 40px;overflow:hidden}
+.orbs{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;-webkit-transform:translate3d(0,var(--py,0px),0);transform:translate3d(0,var(--py,0px),0)}
+.orb{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
+.o1{width:560px;height:560px;background:radial-gradient(circle,rgba(183,243,107,.30),transparent 68%);top:-180px;right:-160px;animation:float1 16s ease-in-out infinite}
+.o2{width:520px;height:520px;background:radial-gradient(circle,rgba(90,176,255,.22),transparent 68%);bottom:-220px;left:-180px;animation:float2 20s ease-in-out infinite}
+@keyframes float1{50%{transform:translate3d(-50px,40px,0) scale(1.12)}}
+@keyframes float2{50%{transform:translate3d(60px,-30px,0) scale(1.08)}}
+.grid-bg{position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.26;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%)}
 .hero .wrap{position:relative}
-.w{display:inline-block;opacity:0;transform:translateY(.6em) rotate(2deg);filter:blur(8px);animation:wi var(--m-slow) var(--ease) forwards}
-@keyframes wi{to{opacity:1;transform:none;filter:none}}
+.wm{display:inline-block;overflow:hidden;vertical-align:top;padding:.1em .05em .16em;margin:-.1em -.05em -.16em}
+.w{display:inline-block;animation:wi .85s var(--ease) both}
+@keyframes wi{from{transform:translate3d(0,112%,0)}to{transform:none}}
 .lime{color:var(--lime)}
-.trust{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;color:var(--mut);font-size:15px}
+.newchip{display:flex;width:-webkit-fit-content;width:fit-content;flex-wrap:nowrap;align-items:center;gap:10px;margin:0 0 18px;padding:6px 14px 6px 6px;min-height:44px;border-radius:24px;border:1px solid var(--edge);background:rgba(183,243,107,.08);font-size:14.5px;line-height:1.3;max-width:100%;transition:border-color var(--m-fast),background-color var(--m-fast)}
+.newchip b{flex:none;position:relative;background:var(--lime);color:var(--ink);font:700 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+.newchip b::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;border-radius:999px;border:2px solid var(--lime);animation:chipring 2.6s ease-out infinite}
+@keyframes chipring{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.55,1.9);opacity:0}}
+.newchip span{min-width:0;flex:1 1 auto}
+.newchip em{flex:none;font-style:normal;color:var(--lime)}
+.trust{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;color:var(--mut);font-size:14.5px}
 .trust span{display:flex;align-items:center;gap:8px}
-.trust svg{width:18px;height:18px;stroke:var(--lime);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.trust svg{flex:none;width:18px;height:18px;stroke:var(--lime);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 
 /* demo de la rampa */
-.demo{margin-top:64px;background:linear-gradient(180deg,var(--panel),#12141a);border:1px solid var(--line);border-radius:26px;padding:26px 26px 20px;box-shadow:0 40px 120px -40px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.04);position:relative}
-.demo-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font:600 13px var(--mono);color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
-.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:#2d3039}
-.speed{font:700 30px var(--mono);color:var(--lime);min-width:5.6ch;text-align:right;letter-spacing:-.02em}
-.speed small{font-size:15px;color:var(--mut);margin-left:4px}
+.demo{margin-top:40px;background:linear-gradient(180deg,var(--panel),#13151a);border:1px solid var(--line);border-radius:22px;padding:22px 22px 16px;box-shadow:0 30px 70px -40px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.04);position:relative}
+.demo-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font:600 12px var(--mono);color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.dots{display:flex;gap:7px}.dots i{width:10px;height:10px;border-radius:50%;background:#2d3039}
+.speed{font:700 26px var(--mono);color:var(--lime);min-width:5.6ch;text-align:right;letter-spacing:-.02em}
+.speed small{font-size:14px;color:var(--mut);margin-left:4px}
 .curve{width:100%;height:auto;display:block;overflow:visible}
 .curve .grid{stroke:#23262f;stroke-width:1}
 .curve .area{fill:url(#ga);opacity:0}
-.curve .ln{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 10px rgba(183,243,107,.55))}
-.curve .dot{fill:#fff;filter:drop-shadow(0 0 12px var(--lime))}
-.strip{margin-top:10px;height:78px;border-radius:12px;overflow:hidden;position:relative;background:#0b0c10;border:1px solid var(--line)}
-.strip .film{position:absolute;inset:0;background-image:linear-gradient(90deg,transparent 0,transparent 74px,#07080b 74px,#07080b 80px),linear-gradient(135deg,#2a3a1d,#1b2f3f 50%,#3a2740);background-size:80px 100%,160px 100%;will-change:background-position}
+.curve .ln{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round}
+.curve .dot{fill:#fff;stroke:rgba(183,243,107,.38);stroke-width:12}
+.strip{margin-top:10px;height:72px;border-radius:12px;overflow:hidden;position:relative;background:#0b0c10;border:1px solid var(--line)}
+.strip .film{position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(90deg,transparent 0,transparent 74px,#07080b 74px,#07080b 80px),linear-gradient(135deg,#2a3a1d,#1b2f3f 50%,#3a2740);background-size:80px 100%,160px 100%}
 .strip .film::before,.strip .film::after{content:"";position:absolute;left:0;right:0;height:9px;background-image:radial-gradient(circle,#0b0c10 3px,transparent 3.5px);background-size:20px 9px}
 .strip .film::before{top:3px}.strip .film::after{bottom:3px}
-.strip .mark{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--lime);box-shadow:0 0 16px var(--lime)}
-.demo-cap{margin-top:14px;font-size:14px;color:var(--mut);text-align:center}
+.strip .mark{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+.demo-cap{margin-top:12px;font-size:14px;color:var(--mut);text-align:center}
 
-/* cuatro módulos */
-.sec-h{max-width:720px;margin-bottom:56px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{--mx:50%;--my:50%;position:relative;padding:30px 26px 28px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:transform var(--m-base) var(--ease),border-color var(--m-base)}
-.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(183,243,107,.16),transparent 60%);opacity:0;transition:opacity var(--m-base)}
-.card:hover{transform:translateY(-6px);border-color:#3a4a28}.card:hover::before{opacity:1}
-.ic{width:52px;height:52px;border-radius:14px;background:rgba(183,243,107,.1);display:grid;place-items:center;margin-bottom:20px;transition:transform var(--m-base) var(--spring)}
-.card:hover .ic{transform:scale(1.1) rotate(-6deg)}
-.ic svg{width:26px;height:26px;stroke:var(--lime);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.card p{color:var(--mut);font-size:16px;margin-top:10px}
+/* video */
+.vid{position:relative;max-width:980px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 30px 70px -40px rgba(183,243,107,.25);-webkit-transform:translateZ(0)}
+.vid::before{content:"";display:block;padding-top:56.25%}
+.vid video{position:absolute;top:0;left:0;width:100%;height:100%;display:block;background:#000;object-fit:contain}
 
-/* pasos */
-.steps{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;--p:0}
-.steps::before{content:"";position:absolute;left:0;right:0;top:27px;height:2px;background:var(--line)}
-.steps::after{content:"";position:absolute;left:0;top:27px;height:2px;width:calc(var(--p)*100%);background:var(--lime);box-shadow:0 0 14px var(--lime);transition:width .2s linear}
-.step{position:relative}
-.step b{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--bg);border:2px solid var(--line);font:700 22px var(--mono);color:var(--mut);margin-bottom:22px;position:relative;z-index:1;transition:all var(--m-base) var(--spring)}
-.step.on b{border-color:var(--lime);color:var(--ink);background:var(--lime);transform:scale(1.08);box-shadow:0 0 30px rgba(183,243,107,.5)}
-.step p{color:var(--mut);margin-top:8px;font-size:16px}
-
-/* precio */
-.price-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
-.price{--ang:0deg;position:relative;border-radius:28px;padding:2px;background:conic-gradient(from var(--ang),#B7F36B,#5ab0ff,#B7F36B 50%,#2a2d35 75%,#B7F36B);animation:spin 6s linear infinite}
-@keyframes spin{to{--ang:360deg}}
-.price-in{background:var(--bg2);border-radius:26px;padding:38px 34px}
-.amount{display:flex;align-items:baseline;gap:8px;margin:8px 0 6px}
-.amount .n{font:800 clamp(56px,8vw,84px)/1 var(--font);letter-spacing:-.04em}
-.amount .u{color:var(--mut);font:600 20px var(--font)}
-.price ul{list-style:none;margin:24px 0 30px;display:grid;gap:13px}
-.price li{display:flex;gap:12px;align-items:flex-start;font-size:16.5px}
-.price li svg{flex:none;width:22px;height:22px;stroke:var(--lime);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
-.price .btn{width:100%}
-.fine{color:var(--mut);font-size:13.5px;margin-top:14px;text-align:center}
-.req{display:grid;gap:14px}
-.req div{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:14px;background:var(--panel);border:1px solid var(--line);transition:border-color var(--m-base),transform var(--m-base) var(--ease)}
-.req div:hover{border-color:#3a4a28;transform:translateX(6px)}
-.req svg{flex:none;width:26px;height:26px;stroke:var(--lime);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.req b{display:block;font-size:16.5px}.req span{color:var(--mut);font-size:15px}
-
-/* faq */
-.faq{max-width:780px;margin:0 auto}
-.q{border-bottom:1px solid var(--line)}
-.q button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4px;font:600 19px var(--font);cursor:pointer;transition:color var(--m-fast)}
-.q button:hover{color:var(--lime)}.q button:focus-visible{outline:2px solid var(--lime);border-radius:8px}
-.q button svg{flex:none;width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;transition:transform var(--m-base) var(--ease)}
-.q.open button svg{transform:rotate(45deg)}
-.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--m-base) var(--ease)}
-.q.open .a{grid-template-rows:1fr}
-.a>div{overflow:hidden}.a p{color:var(--mut);padding:0 4px 24px;font-size:16.5px}
-
-
-/* búsqueda inteligente */
-.ai{background:linear-gradient(180deg,transparent,#11140c 30%,#11140c 75%,transparent)}
-.ai-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;color:var(--txt);transition:border-color var(--m-fast),transform var(--m-base) var(--spring)}
-.chip:hover{border-color:var(--lime);transform:translateY(-2px)}
-.chip svg{width:16px;height:16px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.chip.exp{color:var(--lime);border-color:#3a4a28}
-.powered{display:flex;align-items:center;gap:14px;margin-top:30px;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:var(--panel)}
-.powered .gem{flex:none;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(183,243,107,.2),rgba(90,176,255,.18));display:grid;place-items:center}
-.powered .gem svg{width:24px;height:24px;stroke:#e9ffd0;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.powered b{display:block;font-size:16px}.powered span{color:var(--mut);font-size:14px}
-.sbox{background:linear-gradient(180deg,var(--panel),#12141a);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 40px 100px -40px rgba(0,0,0,.8)}
-.sbar{display:flex;align-items:center;gap:12px;height:54px;padding:0 18px;border-radius:14px;background:#0b0c10;border:1px solid #2e3a1f;box-shadow:0 0 0 4px rgba(183,243,107,.06)}
-.sbar svg{flex:none;width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round}
-.sbar #qt{font:500 18px var(--font);color:var(--txt);white-space:nowrap;overflow:hidden}
-.caret{width:2px;height:22px;background:var(--lime);animation:blink 1s steps(1) infinite;margin-left:-6px}
-@keyframes blink{50%{opacity:0}}
-.res{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.th{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;opacity:0;transform:translateY(14px) scale(.96);transition:opacity .5s var(--ease),transform .6s var(--ease)}
-.th.on{opacity:1;transform:none}
-.th::before{content:"";position:absolute;inset:0;background:var(--g);background-image:var(--img,var(--g));background-size:cover;background-position:center}
-.th::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%)}
-.th.on::after{animation:sweep 1.1s var(--ease) .15s 1 forwards}
-@keyframes sweep{to{transform:translateX(120%)}}
-.th i{position:absolute;left:8px;bottom:8px;font:600 12px var(--mono);padding:3px 8px;border-radius:7px;background:rgba(8,9,12,.78);color:var(--lime);font-style:normal}
-.th s{position:absolute;right:8px;top:8px;text-decoration:none;font:600 11px var(--mono);padding:2px 7px;border-radius:6px;background:rgba(183,243,107,.92);color:var(--ink)}
-.sfoot{margin-top:14px;font-size:13.5px;color:var(--mut);text-align:center}
-@media (max-width:820px){.ai-grid{grid-template-columns:1fr;gap:36px}}
-/* módulos detallados */
-.mods{display:grid;gap:30px}
-.mod{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:40px;border-radius:26px;background:linear-gradient(180deg,var(--panel),#13151b);border:1px solid var(--line);transition:border-color var(--m-base)}
-.mod:hover{border-color:#3a4a28}
-.mod:nth-child(even) .mod-vis{order:-1}
-.mod-txt{min-width:0}
-.mod-hd{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-.mod-hd .ic{margin-bottom:0}
-.mod-n{font:600 13px var(--mono);color:var(--mut);letter-spacing:.1em}
-.mod h3{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.02em;margin-top:10px}
-.hook{color:var(--txt);font-size:18px;margin-top:10px;opacity:.92}
-.pts{list-style:none;display:grid;gap:11px;margin:22px 0 0}
-.pts li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:#d3d5dc}
-.pts svg{flex:none;width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
-.mnote{margin-top:20px;padding:12px 14px;border-left:3px solid var(--lime);background:rgba(183,243,107,.06);border-radius:0 10px 10px 0;font-size:14.5px;color:var(--mut)}
-.mod-vis{min-width:0}
-.vbox{position:relative;border-radius:20px;background:#0b0c10;border:1px solid var(--line);padding:22px;overflow:hidden;min-height:250px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
-.vbox::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 0%,rgba(183,243,107,.10),transparent 70%);pointer-events:none}
+/* módulos: tarjetas resumen + acordeón */
+.hint{margin-top:10px;font-size:14px;color:var(--mut)}
+.mods{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+.mt{scroll-margin-top:calc(var(--hd) + env(safe-area-inset-top) + 12px);--mx:50%;--my:50%;display:block;position:relative;width:100%;overflow:hidden;margin-bottom:10px;border-radius:16px;background:var(--panel);border:1px solid var(--line);transition:border-color var(--m-base),background-color var(--m-base),transform var(--m-base) var(--ease)}
+.mt::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(240px circle at var(--mx) var(--my),rgba(183,243,107,.14),transparent 60%);opacity:0;transition:opacity var(--m-base);pointer-events:none}
+.mt::after{content:"";position:absolute;top:0;bottom:0;left:0;right:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.09) 50%,transparent 62%);transform:translateX(-130%);pointer-events:none}
+.mt.in::after{animation:sweep2 1.4s var(--ease) .35s 1 both}
+@keyframes sweep2{to{transform:translateX(130%)}}
+.mt-in{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:14px 16px;min-height:76px;position:relative}
+.mt .ic{margin:0;width:46px;height:46px}
+.mt-txt{display:block;min-width:0}
+.mt-top{display:flex;align-items:baseline;gap:10px}
+.mt-top b{font-size:19px;letter-spacing:-.015em;line-height:1.2}
+.mod-n{font:600 12px var(--mono);color:var(--mut);letter-spacing:.1em}
+.mt-g{display:block;margin-top:2px;font-size:14px;line-height:1.4;color:var(--mut)}
+.chev{width:22px;height:22px;stroke:var(--mut);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s var(--spring),stroke var(--m-fast)}
+.mt.open{border-color:var(--edge);background:linear-gradient(180deg,#1f2428,var(--panel))}
+.mt.open .chev{transform:rotate(180deg);stroke:var(--lime)}
+.mt.open .ic{background:rgba(183,243,107,.18)}
+.mt.pop .ic{animation:icpop .6s var(--spring)}
+@keyframes icpop{0%{transform:scale(.8) rotate(-10deg)}60%{transform:scale(1.14) rotate(4deg)}100%{transform:none}}
+.mp{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .46s var(--ease),visibility 0s linear .46s}
+.mp.open{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.mp-clip{overflow:hidden;min-height:0}
+.mp .mod{margin-bottom:12px;opacity:0;transform:translate3d(0,10px,0);transition:opacity .4s var(--ease) .06s,transform .5s var(--spring) .06s}
+.mp.open .mod{opacity:1;transform:none}
+.ic{width:52px;height:52px;border-radius:14px;background:rgba(183,243,107,.1);display:grid;place-items:center;transition:transform var(--m-base) var(--spring),background-color var(--m-base)}
+.ic svg{width:24px;height:24px;stroke:var(--lime);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mod{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:36px;align-items:center;padding:30px;border-radius:20px;background:linear-gradient(180deg,var(--panel),#14161b);border:1px solid var(--edge)}
+.mod-txt,.mod-vis{min-width:0}
+.mod-h{font-size:22px;margin-bottom:14px}
+.mod-vis{order:2}
+.mod-txt{order:1}
+.pts{list-style:none;display:grid;gap:10px}
+.pts li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:#d3d5dc;line-height:1.5}
+.pts svg{flex:none;width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.mnote{margin-top:18px;padding:12px 14px;border-left:3px solid var(--lime);background:rgba(183,243,107,.06);border-radius:0 10px 10px 0;font-size:14px;color:var(--mut)}
+.vbox{position:relative;border-radius:18px;background:#0b0c10;border:1px solid var(--line);padding:20px;overflow:hidden;min-height:230px;display:flex;flex-direction:column;justify-content:center}
+.vbox::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(60% 60% at 50% 0%,rgba(183,243,107,.10),transparent 70%);pointer-events:none}
 .v-curve{width:100%;height:auto;display:block;position:relative}
 .v-curve .g{stroke:#23262f;stroke-width:1;fill:none}
 .v-area{fill:rgba(183,243,107,.12)}
-.v-ln{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;stroke-dasharray:420;filter:drop-shadow(0 0 8px rgba(183,243,107,.5))}
-.v-dot{fill:#fff;filter:drop-shadow(0 0 8px var(--lime));offset-path:path("M10 140 C70 140 95 30 160 30 S250 140 310 140");offset-rotate:0deg}
+.v-ln{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;stroke-dasharray:420}
+.v-dot{fill:#fff;stroke:rgba(183,243,107,.4);stroke-width:8;offset-path:path("M10 140 C70 140 95 30 160 30 S250 140 310 140");offset-rotate:0deg}
 .mod.in .v-ln{animation:vdraw 2s var(--ease) both}
 .mod.in .v-dot{animation:vmove 5s ease-in-out 1.6s infinite}
 @keyframes vdraw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
 @keyframes vmove{0%{offset-distance:0%}50%{offset-distance:100%}100%{offset-distance:0%}}
 .v-tags{display:flex;justify-content:space-between;margin-top:8px;font:600 12px var(--mono);color:var(--mut);position:relative}
 .v-tags span:nth-child(2){color:var(--lime)}
-.v-frame{position:relative;border-radius:12px;background:linear-gradient(135deg,#2a3a1d,#1b2f3f 55%,#3a2740);aspect-ratio:16/9;display:flex;align-items:flex-end;justify-content:center;padding:14px;overflow:hidden}
-.v-cap{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .3em;font:800 clamp(20px,3vw,26px)/1.1 var(--font);letter-spacing:-.02em;text-align:center;margin-bottom:6%;text-shadow:0 2px 12px rgba(0,0,0,.7);color:#fff}
+.v-frame{position:relative;border-radius:12px;background:linear-gradient(135deg,#2a3a1d,#1b2f3f 55%,#3a2740);height:0;padding-top:56.25%;overflow:hidden}
+.v-cap{position:absolute;left:10px;right:10px;bottom:12%;display:flex;flex-wrap:wrap;justify-content:center;gap:0 .6em;font:800 clamp(20px,3vw,26px)/1.1 var(--font);letter-spacing:-.02em;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.7);color:#fff}
 .v-cap span{display:inline-block;opacity:.35}
 .v-cap .hl{color:var(--lime)}
 .mod.in .v-cap span{animation:vword 4.8s var(--ease) infinite;animation-delay:calc(var(--k)*.55s)}
@@ -211,90 +184,221 @@ header.s{background:rgba(14,15,19,.72);backdrop-filter:saturate(1.6) blur(18px);
 .v-lang b{color:var(--lime)}.v-lang i{font-style:normal}
 .v-trk{display:flex;gap:6px;margin-top:14px;position:relative}
 .v-trk i,.v-sfx i{display:block;height:14px;border-radius:5px;background:rgba(183,243,107,.28);width:var(--w)}
-.v-wave{display:flex;align-items:center;gap:4px;height:150px;position:relative}
-.v-wave i{flex:1;min-width:0;height:var(--h);border-radius:3px;background:#3b414f;transition:background var(--m-base)}
+.v-wave{display:flex;align-items:center;gap:3px;height:140px;position:relative}
+.v-wave i{flex:1;min-width:0;height:var(--h);border-radius:3px;background:#3b414f}
 .v-wave i.bm{background:#5b7a3a}
-.v-wave i.bt{background:var(--lime);box-shadow:0 0 10px rgba(183,243,107,.5)}
-.v-play{position:absolute;top:22px;bottom:22px;left:22px;width:2px;background:#fff;opacity:.85;box-shadow:0 0 10px #fff}
+.v-wave i.bt{background:var(--lime)}
+.v-play{position:absolute;top:20px;bottom:20px;left:20px;right:22px}
+.v-play::after{content:"";position:absolute;top:0;bottom:0;left:0;width:2px;background:#fff;opacity:.85}
 .mod.in .v-play{animation:vsweep 6s linear infinite}
 .mod.in .v-wave i{animation:vbeat 6s linear infinite;animation-delay:calc(var(--b)*.15s)}
-@keyframes vsweep{from{left:22px}to{left:calc(100% - 24px)}}
-@keyframes vbeat{0%,4%{filter:brightness(1.7)}12%,100%{filter:none}}
-.v-tl{position:relative;display:flex;gap:2px;height:92px;border-radius:10px;overflow:visible}
+@keyframes vsweep{from{transform:translateX(0)}to{transform:translateX(100%)}}
+@keyframes vbeat{0%,4%{opacity:1;filter:brightness(1.7)}12%,100%{filter:none}}
+.v-tl{position:relative;display:flex;gap:2px;height:88px;border-radius:10px}
 .v-clip{flex:1;border-radius:8px}
 .v-clip.a{background:linear-gradient(135deg,#2a3a1d,#1b2f3f)}
 .v-clip.b{background:linear-gradient(135deg,#3a2740,#1b2f3f)}
-.v-cutline{position:absolute;left:50%;top:-10px;bottom:-10px;width:2px;background:var(--lime);box-shadow:0 0 14px var(--lime)}
+.v-cutline{position:absolute;left:50%;top:-10px;bottom:-10px;width:2px;background:var(--lime)}
 .v-ping{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--lime);display:grid;place-items:center}
 .v-ping svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round}
 .mod.in .v-ping{animation:vping 2.6s var(--ease) infinite}
 @keyframes vping{0%{box-shadow:0 0 0 0 rgba(183,243,107,.6)}60%,100%{box-shadow:0 0 0 22px rgba(183,243,107,0)}}
 .v-sfx{display:flex;gap:10px;margin-top:22px;justify-content:center;position:relative}
 .v-sfx i{background:rgba(255,166,77,.55)}
-/* búsqueda: sección estrella */
-.ai{padding-bottom:96px}
-.ai-grid{align-items:start}
-.exh{margin-top:20px;font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
-.exs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-.ex{padding:8px 14px;border-radius:999px;border:1px dashed #3a4a28;background:rgba(183,243,107,.05);color:var(--txt);font-size:15px}
-.ai-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:56px}
-.aic{padding:26px 24px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line)}
-.aic .ic{margin-bottom:16px}.aic p{color:var(--mut);font-size:15.5px;margin-top:10px}.aic p b{color:var(--lime);font-weight:600}
-.tm{margin-top:26px;text-align:center;color:var(--mut);font-size:13.5px}
-.newchip{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px;margin:-4px 0 22px;padding:7px 16px 7px 8px;border-radius:999px;border:1px solid #3a4a28;background:rgba(183,243,107,.08);font-size:15px;max-width:100%;transition:border-color var(--m-fast),transform var(--m-base) var(--spring),background var(--m-fast)}
-.newchip:hover{border-color:var(--lime);background:rgba(183,243,107,.14);transform:translateY(-2px)}
-.newchip b{background:var(--lime);color:var(--ink);font:700 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
-.newchip em{font-style:normal;color:var(--lime)}
-@media (max-width:820px){
-  .mod{grid-template-columns:1fr;gap:28px;padding:26px 20px}
-  .mod:nth-child(even) .mod-vis{order:0}
-  .vbox{min-height:0}
+
+/* búsqueda */
+.ai{background:linear-gradient(180deg,transparent,#12150d 25%,#12150d 80%,transparent)}
+.ai-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;color:var(--txt)}
+.chip svg{flex:none;width:16px;height:16px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.chip.exp{color:var(--lime);border-color:var(--edge)}
+.powered{display:flex;align-items:center;gap:14px;margin-top:22px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:var(--panel)}
+.powered .gem{flex:none;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(183,243,107,.2),rgba(90,176,255,.18));display:grid;place-items:center}
+.powered .gem svg{width:24px;height:24px;stroke:#e9ffd0;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.powered p{min-width:0}
+.powered b{display:block;font-size:16px}.powered span{color:var(--mut);font-size:14px;line-height:1.45;display:block}
+.sbox{background:linear-gradient(180deg,var(--panel),#13151a);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 30px 70px -40px rgba(0,0,0,.8)}
+.sbar{display:flex;align-items:center;gap:12px;height:52px;padding:0 16px;border-radius:14px;background:#0b0c10;border:1px solid #2e3a1f;box-shadow:0 0 0 4px rgba(183,243,107,.06);overflow:hidden}
+.sbar svg{flex:none;width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round}
+.sbar #qt{flex:0 1 auto;min-width:0;font:500 16px var(--font);color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:clip}
+.caret{flex:none;width:2px;height:22px;background:var(--lime);animation:blink 1s steps(1) infinite;margin-left:-6px}
+@keyframes blink{50%{opacity:0}}
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.th{position:relative;height:0;padding-top:62.5%;border-radius:12px;overflow:hidden;opacity:0;transform:translate3d(0,14px,0) scale(.96);transition:opacity .5s var(--ease),transform .6s var(--ease);background:#0b0c10}
+.th.on{opacity:1;transform:none}
+.th::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:var(--g);background-image:var(--img,var(--g));background-size:cover;background-position:center}
+.th::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%)}
+.th.on::after{animation:sweep 1.1s var(--ease) .15s 1 forwards}
+@keyframes sweep{to{transform:translateX(120%)}}
+.th i{position:absolute;left:6px;bottom:6px;z-index:1;font:600 11px var(--mono);padding:2px 7px;border-radius:7px;background:rgba(8,9,12,.78);color:var(--lime);font-style:normal}
+.th s{position:absolute;right:6px;top:6px;z-index:1;text-decoration:none;font:600 11px var(--mono);padding:2px 6px;border-radius:6px;background:rgba(183,243,107,.92);color:var(--ink)}
+.sfoot{margin-top:12px;font-size:13px;color:var(--mut);text-align:center}
+.exh{margin-top:18px;font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.exs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ex{padding:7px 13px;border-radius:999px;border:1px dashed var(--edge);background:rgba(183,243,107,.05);color:var(--txt);font-size:14.5px;max-width:100%;overflow-wrap:anywhere}
+.ai-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin-top:36px}
+.aic{padding:22px 20px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line)}
+.aic .ic{margin-bottom:14px;width:44px;height:44px}
+.aic p{color:var(--mut);font-size:15px;margin-top:8px}.aic p b{color:var(--lime);font-weight:600}
+.ai-q{margin-top:14px}
+.ai-q .ai-cols{margin:0;padding:0 14px 14px}
+.tm{margin-top:22px;text-align:center;color:var(--mut);font-size:13px}
+
+/* pasos */
+.steps{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;--p:0}
+.steps::before{content:"";position:absolute;left:0;right:0;top:23px;height:2px;background:var(--line)}
+.steps::after{content:"";position:absolute;left:0;top:23px;height:2px;width:100%;background:var(--lime);transform:scaleX(var(--p));transform-origin:0 50%}
+.step{position:relative}
+.step b{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--bg);border:2px solid var(--line);font:700 19px var(--mono);color:var(--mut);margin-bottom:16px;position:relative;z-index:1;transition:transform var(--m-base) var(--spring),background-color var(--m-base),border-color var(--m-base),color var(--m-base)}
+.step.on b{border-color:var(--lime);color:var(--ink);background:var(--lime);transform:scale(1.08)}
+.step p{color:var(--mut);margin-top:6px;font-size:15.5px}
+
+/* precio */
+.price-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:36px;align-items:center}
+.price{position:relative;border-radius:26px;padding:2px;overflow:hidden;background:#2a2d35;isolation:isolate}
+.price::before{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:1400px;height:1400px;margin:-700px 0 0 -700px;background:conic-gradient(#B7F36B,#5ab0ff,#B7F36B 50%,#2a2d35 75%,#B7F36B);animation:spin 7s linear infinite;will-change:transform}
+@keyframes spin{to{transform:rotate(360deg)}}
+.price-in{background:var(--bg2);border-radius:24px;padding:30px 28px;position:relative}
+.amount{display:flex;align-items:baseline;gap:8px;margin:6px 0 4px}
+.amount .n{font:800 clamp(52px,8vw,72px)/1 var(--font);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.amount .u{color:var(--mut);font:600 19px var(--font)}
+.price ul{list-style:none;margin:20px 0 24px;display:grid;gap:11px}
+.price li{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.price li svg{flex:none;width:22px;height:22px;stroke:var(--lime);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.price .btn{width:100%}
+.fine{color:var(--mut);font-size:13.5px;margin-top:12px;text-align:center}
+.req{display:grid;gap:10px}
+.req>div{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+.req svg{flex:none;width:24px;height:24px;stroke:var(--lime);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.req p{min-width:0}
+.req b{display:block;font-size:16px;line-height:1.35}.req span{color:var(--mut);font-size:14.5px;display:block;margin-top:2px}
+
+/* desplegables (FAQ y búsqueda) */
+.faq{max-width:780px;margin:0 auto}
+.q{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:10px;overflow:hidden;transition:border-color var(--m-base)}
+.q.open{border-color:var(--edge)}
+.q>button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 18px;min-height:56px;font:600 17px/1.35 var(--font)}
+.q>button>span{min-width:0}
+.q>button svg{flex:none;width:22px;height:22px;stroke:var(--lime);fill:none;stroke-width:2.4;stroke-linecap:round;transition:transform .4s var(--spring)}
+.q.open>button svg{transform:rotate(45deg)}
+.a{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .4s var(--ease),visibility 0s linear .4s}
+.q.open .a{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.a>div{overflow:hidden;min-height:0}
+.a>div>p{color:var(--mut);padding:0 18px 18px;font-size:15.5px}
+
+footer{border-top:1px solid var(--line);padding:36px 0 calc(40px + env(safe-area-inset-bottom));color:var(--mut);font-size:14.5px}
+.fgrid{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:flex-start}
+.fgrid>div{min-width:0}
+.fl{display:flex;flex-wrap:wrap;gap:4px 22px}.fl a{display:inline-flex;align-items:center;min-height:44px}
+
+/* revelado: solo si hay JS */
+.js .rv{opacity:0;transform:translate3d(0,26px,0);transition:opacity var(--m-slow) var(--ease),transform var(--m-slow) var(--ease),border-color var(--m-base),background-color var(--m-base);transition-delay:calc(var(--d,0)*70ms)}
+.js .rv.in{opacity:1;transform:none}
+main{transition:opacity .17s ease}
+main.fx{opacity:0}
+.off,.off *,.off *::before,.off *::after{animation-play-state:paused!important}
+
+@media (hover:hover) and (pointer:fine){
+  .nav nav a:hover{color:var(--txt);background:rgba(255,255,255,.06)}
+  .brand:hover img{transform:rotate(-8deg) scale(1.08)}
+  .lang:hover{border-color:var(--lime)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.p:hover{box-shadow:0 14px 40px -8px rgba(183,243,107,.7)}
+  .btn.g:hover{border-color:var(--lime);background:rgba(183,243,107,.06)}
+  .newchip:hover{border-color:var(--lime);background:rgba(183,243,107,.14)}
+  .mt:hover{border-color:var(--edge)}.mt:hover::before{opacity:1}.mt:hover .ic{transform:scale(1.08) rotate(-6deg)}
+  .q>button:hover{color:var(--lime)}
+  .fl a:hover{color:var(--lime)}
+  .chip:hover{border-color:var(--lime)}
 }
-@media (prefers-reduced-motion:reduce){
-  .v-ln{stroke-dashoffset:0!important}
-  .v-dot{offset-distance:50%!important}
-  .v-cap span{opacity:1!important}
+.mt:active{transform:scale(.99)}
+.about a,.foot a{color:var(--lime)}
+
+@media (min-width:821px){
+  .mods{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px}
+  .mt[data-m="speed"]{grid-row:1;grid-column:1}
+  .mt[data-m="subs"]{grid-row:1;grid-column:2}
+  .mt[data-m="music"]{grid-row:2;grid-column:1}
+  .mt[data-m="sfx"]{grid-row:2;grid-column:2}
+  .mp{grid-row:3;grid-column:1/-1}
+  .mt-in{padding:18px 20px;min-height:92px}
 }
-
-footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-size:15px}
-.fgrid{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:center}
-.fl{display:flex;flex-wrap:wrap;gap:8px 24px}.fl a:hover{color:var(--lime)}
-
-/* revelado al hacer scroll */
-.rv{opacity:0;transform:translateY(34px);filter:blur(6px);transition:opacity var(--m-slow) var(--ease),transform var(--m-slow) var(--ease),filter var(--m-slow) var(--ease);transition-delay:calc(var(--d,0)*70ms)}
-.rv.in{opacity:1;transform:none;filter:none}
-.noanim .rv,.noanim .w{opacity:1;transform:none;filter:none;animation:none;transition:none}
-
 @media (max-width:820px){
-  section{padding:80px 0}.hero{padding-top:120px}
-  .price-wrap{grid-template-columns:1fr}.nav nav a:not(.keep){display:none}
+  section{padding:48px 0}
+  .hero{padding-top:calc(var(--hd) + env(safe-area-inset-top) + 32px);padding-bottom:24px}
+  .sec-h{margin-bottom:22px}
+  .nav nav a{display:none}
+  .burger{display:inline-block}
+  .ai-grid,.price-wrap{grid-template-columns:minmax(0,1fr);gap:28px}
+  .mod{grid-template-columns:minmax(0,1fr);gap:20px;padding:18px 16px}
+  .mod-vis{order:1}.mod-txt{order:2}
+  .mod-h{display:none}
+  .vbox{min-height:0;padding:16px}
+  .v-wave{height:100px}
+  .steps{grid-template-columns:minmax(0,1fr);gap:16px}
   .steps::before,.steps::after{display:none}
+  .step{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:16px;align-items:start}
+  .step b{margin-bottom:0;grid-row:1/3}
+  .step p{margin-top:2px}
+  .demo{margin-top:28px;padding:16px 14px 12px;border-radius:18px}
+  .strip{height:56px}
+  .o1{width:380px;height:380px}.o2{width:340px;height:340px}
+  .price-in{padding:24px 20px}
+  .cta .btn{flex:1 1 220px}
+  .q>button{font-size:16px;padding:12px 16px}
+  .a>div>p{padding:0 16px 16px}
+  .ai-q .ai-cols{padding:0 10px 10px}
+  .mt-in{gap:12px;padding:12px 14px}
+  .mt-top b{font-size:18px}
+}
+@media (max-width:380px){
+  .wrap{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+  .trust{font-size:14px}
+  .mt-g{font-size:13.5px}
+  .res{gap:6px}.th i,.th s{font-size:10px}
+  .btn{padding:12px 18px}
+}
+@media (orientation:landscape) and (max-height:480px){
+  .hero{padding-top:calc(var(--hd) + env(safe-area-inset-top) + 16px)}
+  .mnav a.ml{min-height:48px;font-size:20px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .rv,.w{opacity:1!important;transform:none!important;filter:none!important}
+  .js .rv,.w,.mp .mod,.mnav a.ml{opacity:1!important;transform:none!important;filter:none!important}
+  .mnav a.ml{opacity:1}
+  .th{opacity:1!important;transform:none!important}
   .curve .ln{stroke-dashoffset:0!important}
+  .v-ln{stroke-dashoffset:0!important}
+  .v-dot{offset-distance:50%!important}
+  .v-cap span{opacity:1!important}
+  .orb{display:none}
+  .mt::after{display:none}
 }
-.vid{position:relative;max-width:980px;margin:34px auto 0;border-radius:22px;overflow:hidden;border:1px solid #262932;background:#000;box-shadow:0 40px 90px -40px rgba(183,243,107,.25)}
-.vid video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
 </style>
 </head>
 <body>
+<div id="prog" aria-hidden="true"></div>
 <header id="hd"><div class="wrap nav">
-  <a class="brand" href="#top" aria-label="RK SUITE"><img src="logo.svg" alt="" width="34" height="34"><span>RK SUITE</span></a>
+  <a class="brand" href="#top" aria-label="RK SUITE"><img src="logo.svg" alt="" width="32" height="32"><span>RK SUITE</span></a>
   <nav>
     <a href="#modulos" data-i="n1">Qué hace</a><a href="#pasos" data-i="n2">Cómo se usa</a><a href="#precio" data-i="n3">Precio</a><a href="#faq" data-i="n4">Preguntas</a>
     <button class="lang" id="lang" type="button" aria-label="Idioma / Language">EN</button>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Abrir menú"><i></i><i></i><i></i></button>
   </nav>
 </div></header>
+<nav class="mnav" id="mnav" aria-label="Menú principal">
+  <a class="ml" href="#modulos" data-i="n1">Qué hace</a><a class="ml" href="#pasos" data-i="n2">Cómo se usa</a><a class="ml" href="#precio" data-i="n3">Precio</a><a class="ml" href="#faq" data-i="n4">Preguntas</a>
+  <a class="btn p" href="#precio" data-i="buyw">Ver precio · 49.99 USD</a>
+</nav>
 
 <main id="top">
-<section class="hero">
-  <div class="grid-bg"></div><div class="orb o1"></div><div class="orb o2"></div>
+<section class="hero" data-pause>
+  <div class="grid-bg"></div><div class="orbs"><div class="orb o1"></div><div class="orb o2"></div></div>
   <div class="wrap">
     <div class="eyebrow rv"><i></i><span data-i="eyebrow">Para DaVinci Resolve Studio y Premiere Pro (beta) · Mac con Apple Silicon</span></div>
     <a class="newchip rv" href="#busqueda" style="--d:2"><b data-i="nw_b">Nuevo</b><span data-i="nw_t">Búsqueda con IA EmbeddingGemma 2, 100 % local</span><em aria-hidden="true">→</em></a>
-    <h1 id="h1" aria-label="Speed ramps, subtítulos y música. En un clic."></h1>
+    <h1 id="h1" aria-label="Speed ramps, subtítulos y música. En un clic.">Speed ramps, subtítulos y música. <span class="lime">En un clic.</span></h1>
     <p class="lead rv" style="--d:5;margin-top:26px" data-i="lead">RK SUITE convierte horas de edición en segundos. Hecho por un editor, pensado para que cualquiera lo entienda.</p>
     <div class="cta rv" style="--d:6">
       <a class="btn p" href="#precio" id="buy1" data-i="buy">Comprar · 49.99 USD</a>
@@ -330,13 +434,11 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
 
 <section id="modulos">
   <div class="wrap">
-    <div class="sec-h rv"><div class="eyebrow"><span data-i="m_e">Cuatro módulos y una búsqueda con IA</span></div><h2 data-i="m_h">Todo lo que necesitas. Nada que te estorbe.</h2><p class="lead" data-i="m_p">Cada módulo tiene su botón verde y hace bien una sola cosa. Esto es lo que hace cada uno.</p></div>
-    <div class="mods">
-      <article class="mod rv" id="mod-speed">
-        <div class="mod-txt">
-          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 18C8 18 9 5 12 5s4 13 9 13"/><circle cx="12" cy="5" r="1.6" fill="currentColor"/></svg></div><span class="mod-n">01</span></div>
-          <h3 data-i="m1h">Speedramp</h3>
-          <p class="hook" data-i="m1g">Acelera y frena justo donde quieres, sin keyframes a mano.</p>
+    <div class="sec-h rv"><div class="eyebrow"><span data-i="m_e">Cuatro módulos y una búsqueda con IA</span></div><h2 data-i="m_h">Todo lo que necesitas. Nada que te estorbe.</h2><p class="lead" data-i="m_p">Cada módulo tiene su botón verde y hace bien una sola cosa. Esto es lo que hace cada uno.</p><p class="hint" data-i="m_hint">Toca un módulo para ver el detalle.</p></div>
+    <div class="mods" id="mods">
+      <button type="button" class="mt rv" style="--d:0" id="mt-speed" data-m="speed" aria-expanded="false" aria-controls="mod-speed"><span class="mt-in"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 18C8 18 9 5 12 5s4 13 9 13"/><circle cx="12" cy="5" r="1.6" fill="currentColor"/></svg></span><span class="mt-txt"><span class="mt-top"><span class="mod-n">01</span><b data-i="m1h">Speedramp</b></span><span class="mt-g" data-i="m1g">Acelera y frena justo donde quieres, sin keyframes a mano.</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <div class="mp" id="mod-speed" role="region" aria-labelledby="mt-speed"><div class="mp-clip"><div class="mod">
+        <div class="mod-txt"><h3 class="mod-h" data-i="m1h">Speedramp</h3>
           <ul class="pts">
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p1">Dibujas una curva de velocidad: arrastra un punto arriba o abajo para cambiar la velocidad, a los lados para cambiar el momento.</span></li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p2">Presets listos (Golpe lento, Whip, Acelera, Frena, Doble golpe…) y puedes guardar los tuyos.</span></li>
@@ -348,12 +450,10 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
           <p class="mnote" data-i="m1n">En DaVinci la rampa vive en el mismo clip (Fusion). En Premiere se aplica con un efecto de RK, no con el Time Remapping nativo. El audio no sigue la curva.</p>
         </div>
         <div class="mod-vis" aria-hidden="true"><div class="vbox v-speed"><svg class="v-curve" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet"><g class="g"><path d="M0 42H320M0 85H320M0 128H320M80 0V170M160 0V170M240 0V170"/></g><path class="v-area" d="M10 140 C70 140 95 30 160 30 S250 140 310 140 V170 H10Z"/><path class="v-ln" d="M10 140 C70 140 95 30 160 30 S250 140 310 140"/><circle class="v-dot" r="7" cx="10" cy="140"/><circle cx="160" cy="30" r="5" fill="#0E0F13" stroke="#B7F36B" stroke-width="2.5"/></svg><div class="v-tags"><span>0.3×</span><span>1×</span><span>4×</span></div></div></div>
-      </article>
-      <article class="mod rv" id="mod-subs">
-        <div class="mod-txt">
-          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 11h6M7 15h10"/></svg></div><span class="mod-n">02</span></div>
-          <h3 data-i="m2h">Subtítulos</h3>
-          <p class="hook" data-i="m2g">De la voz al texto en el timeline, en un clic y sin salir de tu Mac.</p>
+      </div></div></div>
+      <button type="button" class="mt rv" style="--d:1" id="mt-subs" data-m="subs" aria-expanded="false" aria-controls="mod-subs"><span class="mt-in"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 11h6M7 15h10"/></svg></span><span class="mt-txt"><span class="mt-top"><span class="mod-n">02</span><b data-i="m2h">Subtítulos</b></span><span class="mt-g" data-i="m2g">De la voz al texto en el timeline, en un clic y sin salir de tu Mac.</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <div class="mp" id="mod-subs" role="region" aria-labelledby="mt-subs"><div class="mp-clip"><div class="mod">
+        <div class="mod-txt"><h3 class="mod-h" data-i="m2h">Subtítulos</h3>
           <ul class="pts">
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p1">Flujo de un clic: transcribe, traduce si hace falta y escribe los subtítulos en tu timeline.</span></li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p2">Eliges el idioma del audio y el de los subtítulos: español, inglés, portugués, francés, alemán o italiano.</span></li>
@@ -365,12 +465,10 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
           <p class="mnote" data-i="m2n">Los subtítulos y la traducción necesitan macOS 26 o superior.</p>
         </div>
         <div class="mod-vis" aria-hidden="true"><div class="vbox v-subs"><div class="v-frame"><div class="v-cap"><span style="--k:0"><span data-i="vw1">Edita</span></span> <span style="--k:1"><span data-i="vw2">menos.</span></span> <span style="--k:2" class="hl"><span data-i="vw3">Crea</span></span> <span style="--k:3"><span data-i="vw4">más.</span></span></div><div class="v-lang"><b>ES</b><i>⇄</i><b>EN</b></div></div><div class="v-trk"><i style="--w:34%"></i><i style="--w:22%"></i><i style="--w:30%"></i></div></div></div>
-      </article>
-      <article class="mod rv" id="mod-music">
-        <div class="mod-txt">
-          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></div><span class="mod-n">03</span></div>
-          <h3 data-i="m3h">Música</h3>
-          <p class="hook" data-i="m3g">Corta a ritmo: tu canción ya viene marcada en el timeline.</p>
+      </div></div></div>
+      <button type="button" class="mt rv" style="--d:2" id="mt-music" data-m="music" aria-expanded="false" aria-controls="mod-music"><span class="mt-in"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span><span class="mt-txt"><span class="mt-top"><span class="mod-n">03</span><b data-i="m3h">Música</b></span><span class="mt-g" data-i="m3g">Corta a ritmo: tu canción ya viene marcada en el timeline.</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <div class="mp" id="mod-music" role="region" aria-labelledby="mt-music"><div class="mp-clip"><div class="mod">
+        <div class="mod-txt"><h3 class="mod-h" data-i="m3h">Música</h3>
           <ul class="pts">
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p1">Marcadores de beat por compases, frases (4 compases) o cada beat, con los drops en rojo.</span></li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p2">Modo «Golpes»: marca solo los golpes fuertes de la canción.</span></li>
@@ -382,12 +480,10 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
           <p class="mnote" data-i="m3n">Automix solo está disponible en DaVinci Resolve por ahora.</p>
         </div>
         <div class="mod-vis" aria-hidden="true"><div class="vbox v-music"><div class="v-wave"><i class="bt" style="--h:32%;--b:0"></i><i style="--h:62%;--b:1"></i><i style="--h:65%;--b:2"></i><i style="--h:33%;--b:3"></i><i class="bm" style="--h:40%;--b:4"></i><i style="--h:19%;--b:5"></i><i style="--h:31%;--b:6"></i><i style="--h:18%;--b:7"></i><i class="bt" style="--h:69%;--b:8"></i><i style="--h:72%;--b:9"></i><i style="--h:42%;--b:10"></i><i style="--h:44%;--b:11"></i><i class="bm" style="--h:81%;--b:12"></i><i style="--h:46%;--b:13"></i><i style="--h:18%;--b:14"></i><i style="--h:21%;--b:15"></i><i class="bt" style="--h:46%;--b:16"></i><i style="--h:30%;--b:17"></i><i style="--h:39%;--b:18"></i><i style="--h:72%;--b:19"></i><i class="bm" style="--h:76%;--b:20"></i><i style="--h:20%;--b:21"></i><i style="--h:59%;--b:22"></i><i style="--h:56%;--b:23"></i><i class="bt" style="--h:41%;--b:24"></i><i style="--h:21%;--b:25"></i><i style="--h:30%;--b:26"></i><i style="--h:39%;--b:27"></i><i class="bm" style="--h:34%;--b:28"></i><i style="--h:62%;--b:29"></i><i style="--h:74%;--b:30"></i><i style="--h:39%;--b:31"></i><i class="bt" style="--h:58%;--b:32"></i><i style="--h:59%;--b:33"></i><i style="--h:37%;--b:34"></i><i style="--h:18%;--b:35"></i><i class="bm" style="--h:40%;--b:36"></i><i style="--h:44%;--b:37"></i><i style="--h:32%;--b:38"></i><i style="--h:45%;--b:39"></i></div><div class="v-play"></div></div></div>
-      </article>
-      <article class="mod rv" id="mod-sfx">
-        <div class="mod-txt">
-          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div><span class="mod-n">04</span></div>
-          <h3 data-i="m4h">Sonidos</h3>
-          <p class="hook" data-i="m4g">Efectos de sonido en tus cortes y transiciones, sacados de tu propia biblioteca.</p>
+      </div></div></div>
+      <button type="button" class="mt rv" style="--d:3" id="mt-sfx" data-m="sfx" aria-expanded="false" aria-controls="mod-sfx"><span class="mt-in"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></span><span class="mt-txt"><span class="mt-top"><span class="mod-n">04</span><b data-i="m4h">Sonidos</b></span><span class="mt-g" data-i="m4g">Efectos de sonido en tus cortes y transiciones, sacados de tu propia biblioteca.</span></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <div class="mp" id="mod-sfx" role="region" aria-labelledby="mt-sfx"><div class="mp-clip"><div class="mod">
+        <div class="mod-txt"><h3 class="mod-h" data-i="m4h">Sonidos</h3>
           <ul class="pts">
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p1">Usas tu propia biblioteca de efectos: agregas tus carpetas y RK las lee sin copiar tus archivos.</span></li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p2">Detecta las rampas y transiciones hechas con RK (cuadro exacto, duración e intensidad) y propone 3 sonidos para cada una.</span></li>
@@ -398,8 +494,8 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
           </ul>
           <p class="mnote" data-i="m4n">Necesitas tu propia biblioteca de efectos de sonido; RK SUITE no la sustituye.</p>
         </div>
-        <div class="mod-vis" aria-hidden="true"><div class="vbox v-sfx"><div class="v-tl"><div class="v-clip a"></div><div class="v-clip b"></div><div class="v-cutline"></div><div class="v-ping"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div></div><div class="v-sfx"><i style="--w:12%"></i><i style="--w:8%"></i><i style="--w:16%"></i></div></div></div>
-      </article>
+        <div class="mod-vis" aria-hidden="true"><div class="vbox v-sfxb"><div class="v-tl"><div class="v-clip a"></div><div class="v-clip b"></div><div class="v-cutline"></div><div class="v-ping"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div></div><div class="v-sfx"><i style="--w:12%"></i><i style="--w:8%"></i><i style="--w:16%"></i></div></div></div>
+      </div></div></div>
     </div>
   </div>
 </section>
@@ -432,9 +528,11 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
   <div class="ai-cols">
     <div class="aic rv" style="--d:0"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div><h3 data-i="ai_w1h">Qué hace</h3><p data-i="ai_w1p">Escribes lo que buscas, con tus palabras, en español o inglés. EmbeddingGemma 2 entiende el significado de lo que ves en tus videos y RK SUITE te lleva al cuadro, listo para insertarlo en tu timeline. Busca solo en video.</p></div>
     <div class="aic rv" style="--d:1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3 data-i="ai_w2h">100 % local y privado</h3><p data-i="ai_w2p">La IA corre por completo en tu Mac. Tus videos no se suben a internet ni se copian: solo se indexan en tu computadora.</p></div>
-    <div class="aic rv" style="--d:2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div><h3 data-i="ai_w3h">Cómo se activa</h3><p data-i="ai_w3p">Es un complemento opcional que se instala desde el panel de RK SUITE. Se abre un instalador en la Terminal que te muestra las licencias y te pide escribir ACEPTO (ACCEPT si tu Terminal está en inglés) para continuar. Después agregas tus carpetas e indexas.</p></div>
-    <div class="aic rv" style="--d:3"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3 data-i="ai_w4h">Qué necesitas</h3><p data-i="ai_w4p">Mac con Apple Silicon y macOS 14 o superior. El complemento descarga unos 2.4 GB. Es una función <b>experimental</b> y se ofrece sin garantía.</p></div>
   </div>
+  <div class="q ai-q rv"><button type="button" aria-expanded="false"><span data-i="ai_more">Cómo se activa y qué necesitas</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><div class="ai-cols">
+    <div class="aic"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div><h3 data-i="ai_w3h">Cómo se activa</h3><p data-i="ai_w3p">Es un complemento opcional que se instala desde el panel de RK SUITE. Se abre un instalador en la Terminal que te muestra las licencias y te pide escribir ACEPTO (ACCEPT si tu Terminal está en inglés) para continuar. Después agregas tus carpetas e indexas.</p></div>
+    <div class="aic"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3 data-i="ai_w4h">Qué necesitas</h3><p data-i="ai_w4p">Mac con Apple Silicon y macOS 14 o superior. El complemento descarga unos 2.4 GB. Es una función <b>experimental</b> y se ofrece sin garantía.</p></div>
+  </div></div></div></div>
   <p class="tm rv" data-i="ai_tm">EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.</p>
   </div>
 </section>
@@ -452,7 +550,7 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
 
 <section id="precio">
   <div class="wrap price-wrap">
-    <div class="price rv"><div class="price-in">
+    <div class="price rv" data-pause><div class="price-in">
       <div class="eyebrow"><span data-i="p_e">Licencia RK SUITE</span></div>
       <div class="amount"><span class="n" id="n49">49.99</span><span class="u">USD</span></div>
       <p style="color:var(--mut)" data-i="p_s">Un solo pago. Sin suscripción.</p>
@@ -481,13 +579,13 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
   <div class="wrap">
     <div class="sec-h rv" style="margin:0 auto 40px;text-align:center"><h2 data-i="f_h">Preguntas frecuentes</h2></div>
     <div class="faq" id="faqs">
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q1">¿Funciona con la versión gratuita de DaVinci Resolve?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a1">No. Los plugins de Workflow Integration solo funcionan en DaVinci Resolve Studio, que es la versión de pago de Blackmagic.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q2">¿Y en Premiere Pro?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a2">Sí. RK SUITE también tiene panel para Adobe Premiere Pro, que está en beta: puede tener detalles por pulir y algunas funciones, como Automix, son solo de DaVinci por ahora. En Premiere la rampa se aplica con un efecto de RK, no con el Time Remapping nativo.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q3">¿Mis videos se suben a algún lado?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a3">No. Todo se procesa en tu Mac: tus videos, tu audio y tus subtítulos no salen de tu computadora. Solo se comprueba tu licencia por internet.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q7">¿Qué es la búsqueda con EmbeddingGemma 2?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a7">Es un complemento opcional y experimental: describes una escena con tus palabras y te lleva al cuadro dentro de tus videos. La IA corre 100 % en tu Mac y tus videos no se suben a internet. Necesita Apple Silicon, macOS 14 o superior y unos 2.4 GB de descarga.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q4">¿Qué pasa si cambio de Mac?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a4">Tu llave sirve en 2 Macs. Desactiva uno desde el plugin y activa el nuevo cuando quieras.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q5">macOS dice que no puede verificar el instalador</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a5">Es normal la primera vez: el instalador no está firmado con una cuenta de desarrollador de Apple. Ve a Ajustes del Sistema › Privacidad y seguridad, baja hasta el aviso del instalador y pulsa «Abrir de todos modos». Solo se pide una vez.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q6">¿Cómo recibo ayuda?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p><span data-i="a6">Escríbenos a</span> <a href="mailto:alexanderpineda07@gmail.com" style="color:var(--lime)">alexanderpineda07@gmail.com</a>. <span data-i="a6b">Respondemos personalmente.</span></p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q1">¿Funciona con la versión gratuita de DaVinci Resolve?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a1">No. Los plugins de Workflow Integration solo funcionan en DaVinci Resolve Studio, que es la versión de pago de Blackmagic.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q2">¿Y en Premiere Pro?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a2">Sí. RK SUITE también tiene panel para Adobe Premiere Pro, que está en beta: puede tener detalles por pulir y algunas funciones, como Automix, son solo de DaVinci por ahora. En Premiere la rampa se aplica con un efecto de RK, no con el Time Remapping nativo.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q3">¿Mis videos se suben a algún lado?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a3">No. Todo se procesa en tu Mac: tus videos, tu audio y tus subtítulos no salen de tu computadora. Solo se comprueba tu licencia por internet.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q7">¿Qué es la búsqueda con EmbeddingGemma 2?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a7">Es un complemento opcional y experimental: describes una escena con tus palabras y te lleva al cuadro dentro de tus videos. La IA corre 100 % en tu Mac y tus videos no se suben a internet. Necesita Apple Silicon, macOS 14 o superior y unos 2.4 GB de descarga.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q4">¿Qué pasa si cambio de Mac?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a4">Tu llave sirve en 2 Macs. Desactiva uno desde el plugin y activa el nuevo cuando quieras.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q5">macOS dice que no puede verificar el instalador</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a5">Es normal la primera vez: el instalador no está firmado con una cuenta de desarrollador de Apple. Ve a Ajustes del Sistema › Privacidad y seguridad, baja hasta el aviso del instalador y pulsa «Abrir de todos modos». Solo se pide una vez.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q6">¿Cómo recibo ayuda?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p><span data-i="a6">Escríbenos a</span> <a href="mailto:alexanderpineda07@gmail.com" style="color:var(--lime)">alexanderpineda07@gmail.com</a>. <span data-i="a6b">Respondemos personalmente.</span></p></div></div></div>
     </div>
   </div>
 </section>
@@ -524,7 +622,7 @@ es:{m_e:"Cuatro módulos y una búsqueda con IA",m_h:"Todo lo que necesitas. Nad
  q3:"¿Mis videos se suben a algún lado?",a3:"No. Todo se procesa en tu Mac: tus videos, tu audio y tus subtítulos no salen de tu computadora. Solo se comprueba tu licencia por internet.",
  q4:"¿Qué pasa si cambio de Mac?",a4:"Tu llave sirve en 2 Macs. Desactiva uno desde el plugin y activa el nuevo cuando quieras.",
  q5:"macOS dice que no puede verificar el instalador",a5:"Es normal la primera vez: el instalador no está firmado con una cuenta de desarrollador de Apple. Ve a Ajustes del Sistema › Privacidad y seguridad, baja hasta el aviso del instalador y pulsa «Abrir de todos modos». Solo se pide una vez.",
- q6:"¿Cómo recibo ayuda?",a6:"Escríbenos a",a6b:"Respondemos personalmente.",fo:"Hecho en Guatemala por REDKAM",l1:"Términos de uso",l2:"Privacidad",l3:"Reembolsos"},
+ q6:"¿Cómo recibo ayuda?",a6:"Escríbenos a",a6b:"Respondemos personalmente.",fo:"Hecho en Guatemala por REDKAM",l1:"Términos de uso",l2:"Privacidad",l3:"Reembolsos",m_hint:"Toca un módulo para ver el detalle.",ai_more:"Cómo se activa y qué necesitas",mn_open:"Abrir menú",mn_close:"Cerrar menú",mn_nav:"Menú principal"},
 en:{m_e:"Four modules and an AI search",m_h:"Everything you need. Nothing in your way.",m_p:"Each module has its own green button and does one thing well. Here is what each one does.",vw1:"Edit",vw2:"less.",vw3:"Create",vw4:"more.",m1h:"Speedramp",m1g:"Speed up and slow down exactly where you want, no hand-made keyframes.",m1n:"In DaVinci the ramp lives in the same clip (Fusion). In Premiere it is applied with an RK effect, not native Time Remapping. Audio does not follow the curve.",m1p1:"Draw a speed curve: drag a point up or down to change the speed, sideways to change the moment.",m1p2:"Ready-made presets (Slow hit, Whip, Speed up, Slow down, Double hit…) and you can save your own.",m1p3:"The curve fits the clip’s duration, or you set the final duration in seconds.",m1p4:"“Keep the moments” pins each point to a frame of the video so the hit lands where you put it.",m1p5:"Automatic motion blur on fast parts and adjustable frame quality (Sharp, Blend or Optical Flow).",m1p6:"RK Whip transition on the cut and a button to undo the last ramp.",m2h:"Subtitles",m2g:"From voice to text on your timeline, in one click and without leaving your Mac.",m2n:"Subtitles and translation need macOS 26 or later.",m2p1:"One-click flow: it transcribes, translates if needed and writes the subtitles on your timeline.",m2p2:"You pick the audio language and the subtitle language: Spanish, English, Portuguese, French, German or Italian.",m2p3:"Transcription runs on your Mac, with no internet, and is saved so it is not repeated.",m2p4:"Review and fix the text in each box while keeping the timing; mark keywords with one click.",m2p5:"Cut styles (Social, Reels, Standard, Cinema), fonts, outline, shadow and word-by-word animation.",m2p6:"Remove filler words (uh, um…) from the text only, and export to SRT, VTT or word-level JSON.",m3h:"Music",m3g:"Cut to the beat: your song comes already marked on the timeline.",m3n:"Automix is only available in DaVinci Resolve for now.",m3p1:"Beat markers by bars, phrases (4 bars) or every beat, with drops in red.",m3p2:"“Hits” mode: marks only the song’s strong hits.",m3p3:"“Manual pulse”: type or tap the tempo, set the “1” at the cursor and fine-tune with a small offset.",m3p4:"Reverb ending: leaves an echo tail after the last sound so the song ends cleanly.",m3p5:"Audio effects and transitions between two songs (Tape stop, Rewind, Riser) with matched volume.",m3p6:"Automix: a DJ-style mix that matches the tempo of two songs without changing the pitch.",m4h:"Sounds",m4g:"Sound effects on your cuts and transitions, taken from your own library.",m4n:"You need your own sound-effects library; RK SUITE does not replace it.",m4p1:"You use your own sound-effects library: add your folders and RK reads them without copying your files.",m4p2:"It detects the ramps and transitions made with RK (exact frame, duration and intensity) and suggests 3 sounds for each.",m4p3:"You choose the amount (few, normal, many) and the volume (soft, normal, loud).",m4p4:"Smart trim: short lead-in, hit on the cut and a faded tail.",m4p5:"Sounds go to separate audio tracks, your clips are not touched, and you can undo the last batch.",m4p6:"Works with no internet; only the sounds actually used are imported into your project.",ai_e:"New · The star of RK SUITE",ai_h:"Search with EmbeddingGemma 2",ai_p:"Describe the scene in your own words and RK SUITE takes you to the exact frame inside your videos. Stop watching hours of footage.",ai_c1:"100% on your Mac",ai_c2:"Optional add-on",ai_c3:"Experimental",ai_pw:"Powered by EmbeddingGemma 2",ai_pws:"Open model from Google DeepMind (labeled Apache 2.0 on Hugging Face; Gemma terms may apply). It runs on your own Mac.",ai_f:"Illustrative example. Your videos are analyzed on your computer and nothing is uploaded to the internet.",ai_exh:"Try searching for things like…",ai_ex1:"“people smiling on the beach”",ai_ex2:"“drone over the volcano at sunrise”",ai_ex3:"“close-up of hands typing”",ai_w1h:"What it does",ai_w1p:"You type what you are looking for, in your own words, in Spanish or English. EmbeddingGemma 2 understands the meaning of what is in your videos and RK SUITE takes you to the frame, ready to insert into your timeline. It searches video only.",ai_w2h:"100% local and private",ai_w2p:"The AI runs entirely on your Mac. Your videos are not uploaded to the internet or copied: they are only indexed on your computer.",ai_w3h:"How to turn it on",ai_w3p:"It is an optional add-on installed from the RK SUITE panel. An installer opens in Terminal, shows you the licenses and asks you to type ACCEPT (ACEPTO if your Terminal is in Spanish) to continue. Then you add your folders and index them.",ai_w4h:"What you need",ai_w4p:"A Mac with Apple Silicon and macOS 14 or later. The add-on downloads about 2.4 GB. It is an <b>experimental</b> feature and is offered without warranty.",ai_tm:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",nw_b:"New",nw_t:"AI search with EmbeddingGemma 2, 100% local",eyebrow:"For DaVinci Resolve Studio and Premiere Pro (beta) · Apple Silicon Mac",q2:"What about Premiere Pro?",a2:"Yes. RK SUITE also has a panel for Adobe Premiere Pro, which is in beta: it may have rough edges and some features, like Automix, are DaVinci-only for now. In Premiere the ramp is applied with an RK effect, not native Time Remapping.",q7:"What is the EmbeddingGemma 2 search?",a7:"It is an optional, experimental add-on: you describe a scene in your own words and it takes you to the frame inside your videos. The AI runs 100% on your Mac and your videos are not uploaded to the internet. It needs Apple Silicon, macOS 14 or later and about a 2.4 GB download.",r2h:"DaVinci Resolve Studio 21 or Premiere Pro",r2p:"Resolve plugins do not work on the free version. The Premiere panel is in beta.",r4h:"AI search (optional)",r4p:"Apple Silicon and macOS 14 or later. Add-on of about 2.4 GB.",v_e:"See it in action",v_h:"30 seconds to get it all.",attr:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",n1:"What it does",n2:"How it works",n3:"Price",n4:"FAQ",
  h1:"Speed ramps, subtitles and music. In one click.",lead:"RK SUITE turns hours of editing into seconds. Made by an editor, designed so anyone can understand it.",
  buy:"Buy · 49.99 USD",buyw:"See price · 49.99 USD",how:"See what it does",t1:"One-time payment, no subscription",t2:"License for 2 Macs",t3:"Everything runs on your Mac",cap:"You draw the curve. Your clip speeds up and slows down exactly where you want.",
@@ -543,23 +641,27 @@ en:{m_e:"Four modules and an AI search",m_h:"Everything you need. Nothing in you
  q3:"Are my videos uploaded anywhere?",a3:"No. Everything runs on your Mac: your videos, audio and subtitles never leave your computer. Only your license is checked online.",
  q4:"What if I change Macs?",a4:"Your key works on 2 Macs. Deactivate one from the plugin and activate the new one whenever you like.",
  q5:"macOS says it cannot verify the installer",a5:"This is normal the first time: the installer is not signed with an Apple developer account. Go to System Settings › Privacy & Security, scroll to the installer notice and click “Open Anyway”. It is only asked once.",
- q6:"How do I get help?",a6:"Write to us at",a6b:"We answer personally.",fo:"Made in Guatemala by REDKAM",l1:"Terms of use",l2:"Privacy",l3:"Refunds"}
+ q6:"How do I get help?",a6:"Write to us at",a6b:"We answer personally.",fo:"Made in Guatemala by REDKAM",l1:"Terms of use",l2:"Privacy",l3:"Refunds",m_hint:"Tap a module to see the details.",ai_more:"How to turn it on and what you need",mn_open:"Open menu",mn_close:"Close menu",mn_nav:"Main menu"}
 };
-var lang="es", reduced=false, el=function(i){return document.getElementById(i)};
+var lang="es", reduced=false, el=function(i){return document.getElementById(i)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var raf=window.requestAnimationFrame||function(f){return setTimeout(function(){f(Date.now())},16)};
 try{reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
 if(reduced)document.documentElement.classList.add("noanim");
+var fine=false;try{fine=window.matchMedia("(hover:hover) and (pointer:fine)").matches}catch(e){}
 try{var sv=localStorage.getItem("rk.lang");if(sv==="en"||sv==="es")lang=sv;else if((navigator.language||"").toLowerCase().indexOf("es")!==0)lang="en"}catch(e){}
+var root=document.documentElement;
 
-function words(){ // titular: palabra por palabra, la última frase resaltada
-  var h=el("h1");h.textContent="";var parts=T[lang].h1.split(" "),cut=lang==="es"?parts.length-3:parts.length-4;
-  parts.forEach(function(w,i){var s=document.createElement("span");s.className="w"+(i>=cut?" lime":"");s.style.animationDelay=(reduced?0:i*70+120)+"ms";s.textContent=w;h.appendChild(s);h.appendChild(document.createTextNode(" "))});
+function words(){ // titular: palabra por palabra con máscara, la última frase resaltada
+  var h=el("h1");h.textContent="";var parts=T[lang].h1.split(" "),cut=parts.length-3;
+  parts.forEach(function(w,i){var m=document.createElement("span");m.className="wm";var s=document.createElement("span");s.className="w"+(i>=cut?" lime":"");s.style.animationDelay=(reduced?0:i*80+120)+"ms";s.textContent=w;m.appendChild(s);h.appendChild(m);h.appendChild(document.createTextNode(" "))});
   h.setAttribute("aria-label",T[lang].h1);
 }
+function menuLabel(){var o=root.classList.contains("menu-open");el("burger").setAttribute("aria-label",T[lang][o?"mn_close":"mn_open"]);el("mnav").setAttribute("aria-label",T[lang].mn_nav)}
 function apply(){
-  document.documentElement.lang=lang;
-  document.querySelectorAll("[data-i]").forEach(function(n){var k=n.getAttribute("data-i");if(T[lang][k]!==undefined)n.innerHTML=T[lang][k]});
+  root.lang=lang;
+  $$("[data-i]").forEach(function(n){var k=n.getAttribute("data-i");if(T[lang][k]!==undefined)n.innerHTML=T[lang][k]});
   el("lang").textContent=lang==="es"?"EN":"ES";
-  words();wireBuy();
+  words();wireBuy();menuLabel();
   document.title=lang==="es"?"RK SUITE · Speed ramps, subtítulos y música para DaVinci Resolve":"RK SUITE · Speed ramps, subtitles and music for DaVinci Resolve";
 }
 function wireBuy(){
@@ -567,32 +669,104 @@ function wireBuy(){
   if(CHECKOUT_URL){b.href=CHECKOUT_URL;b.target="_blank";b.rel="noopener";b1.href=CHECKOUT_URL;b1.target="_blank";b1.rel="noopener"}
   else{b1.innerHTML=T[lang].buyw;b.innerHTML=T[lang].buy2w;b.href="mailto:"+SUPPORT+"?subject="+encodeURIComponent("RK SUITE · "+T[lang].buy2w);b.removeAttribute("target");el("fine").innerHTML=T[lang].finew}
 }
-el("lang").addEventListener("click",function(){lang=lang==="es"?"en":"es";try{localStorage.setItem("rk.lang",lang)}catch(e){}apply()});
+el("lang").addEventListener("click",function(){
+  lang=lang==="es"?"en":"es";try{localStorage.setItem("rk.lang",lang)}catch(e){}
+  if(reduced){apply();return}
+  var m=el("top");m.classList.add("fx");setTimeout(function(){apply();m.classList.remove("fx")},170);
+});
 el("yr").textContent=new Date().getFullYear();
 apply();
 
-// cabecera con cristal al hacer scroll
-var hd=el("hd");function sc(){hd.classList.toggle("s",window.scrollY>12)}sc();window.addEventListener("scroll",sc,{passive:true});
+// ───────── menú móvil ─────────
+var hd=el("hd"),burger=el("burger");
+function menu(o){root.classList.toggle("menu-open",o);hd.classList.toggle("mo",o);burger.setAttribute("aria-expanded",o?"true":"false");menuLabel()}
+burger.addEventListener("click",function(){menu(!root.classList.contains("menu-open"))});
+document.addEventListener("keydown",function(e){if((e.key==="Escape"||e.key==="Esc")&&root.classList.contains("menu-open")){menu(false);burger.focus()}});
+window.addEventListener("resize",function(){if(window.innerWidth>820&&root.classList.contains("menu-open"))menu(false)});
 
-// revelado al entrar en pantalla
-var io=("IntersectionObserver" in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12,rootMargin:"0px 0px -6% 0px"}):null;
-document.querySelectorAll(".rv").forEach(function(n){if(io)io.observe(n);else n.classList.add("in")});
+// ───────── acordeón de módulos (solo uno abierto) ─────────
+var MODS={speed:"mod-speed",subs:"mod-subs",music:"mod-music",sfx:"mod-sfx"};
+var MAP={speed:"speed",speedramp:"speed",subtitulos:"subs",subtitles:"subs",subs:"subs",musica:"music",music:"music",sonidos:"sfx",sounds:"sfx",sfx:"sfx"};
+var mbtns=$$(".mt");
+function setOpen(b,o){
+  var p=el(b.getAttribute("aria-controls"));if(!p)return;
+  if((b.getAttribute("aria-expanded")==="true")===o)return;
+  b.setAttribute("aria-expanded",o?"true":"false");b.classList.toggle("open",o);p.classList.toggle("open",o);
+  var m=p.querySelector(".mod");if(m){m.classList.remove("in");if(o){void m.offsetWidth;m.classList.add("in")}}
+  if(o){b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop")}
+}
+function openMod(k){mbtns.forEach(function(b){setOpen(b,b.getAttribute("data-m")===k)})}
+function scrollByY(dy){try{window.scrollBy({top:dy,left:0,behavior:reduced?"auto":"smooth"})}catch(e){window.scrollBy(0,dy)}}
+function reveal(b){ // lleva a la vista lo recién abierto
+  setTimeout(function(){
+    var r=b.getBoundingClientRect(),top=(parseInt(getComputedStyle(root).getPropertyValue("--hd"),10)||64)+16,vh=window.innerHeight;
+    var p=el(b.getAttribute("aria-controls")),pb=p.getBoundingClientRect().bottom,dy=0;
+    if(window.innerWidth>820){dy=Math.min(pb-vh+24,r.top-top);if(dy<0)dy=0}
+    else if(r.top<top||r.top>vh*.55)dy=r.top-top-8;
+    if(dy)scrollByY(dy);
+  },reduced?0:470);
+}
+mbtns.forEach(function(b){
+  b.addEventListener("click",function(){var was=b.getAttribute("aria-expanded")==="true";mbtns.forEach(function(o){setOpen(o,o===b&&!was)});if(!was)reveal(b)});
+  if(fine&&!reduced)b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();b.style.setProperty("--mx",(e.clientX-r.left)+"px");b.style.setProperty("--my",(e.clientY-r.top)+"px")});
+});
 
-// brillo que sigue al cursor en las tarjetas
-document.querySelectorAll(".card").forEach(function(c){c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px")})});
+// ───────── navegación interna y enlaces profundos (#mod-subs, #modulos?m=subtitulos) ─────────
+function scrollToEl(t){try{t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"})}catch(e){t.scrollIntoView(true)}}
+function route(h){
+  var id=h.replace(/^#/,""),mk=null,m=/[?&]m=([a-z]+)/i.exec(id);
+  if(m){id=id.split("?")[0];mk=MAP[m[1].toLowerCase()]||null}
+  else for(var k in MODS){if(MODS[k]===id)mk=k}
+  if(mk){openMod(mk);var b=el("mt-"+mk);setTimeout(function(){scrollToEl(b)},reduced?0:480);return true}
+  var t=id&&el(id);if(t){scrollToEl(t);return true}
+  return false;
+}
+document.addEventListener("click",function(e){
+  var a=e.target.closest?e.target.closest('a[href^="#"]'):null;if(!a)return;
+  var h=a.getAttribute("href");if(!h||h.length<2)return;
+  e.preventDefault();menu(false);
+  if(route(h)){try{history.replaceState(null,"",h)}catch(x){}}
+});
+window.addEventListener("hashchange",function(){if(location.hash)route(location.hash)});
 
-// pasos: la línea se llena al hacer scroll
-var steps=el("steps"),st=steps.querySelectorAll(".step");
+// ───────── desplegables FAQ y búsqueda ─────────
+$$(".q").forEach(function(q,i){
+  var b=q.querySelector("button"),a=q.querySelector(".a");a.id=a.id||"qa"+i;b.setAttribute("aria-controls",a.id);b.setAttribute("aria-expanded","false");
+  b.addEventListener("click",function(){var o=!q.classList.contains("open");q.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false")});
+});
+
+// ───────── scroll: cabecera, progreso, pasos, parallax (un solo rAF) ─────────
+var prog=el("prog"),steps=el("steps"),st=$$(".step",steps),orbs=document.querySelector(".orbs"),tick=false;
 function sp(){var r=steps.getBoundingClientRect(),vh=window.innerHeight,p=Math.max(0,Math.min(1,(vh*.78-r.top)/(r.height+vh*.1)));steps.style.setProperty("--p",p.toFixed(3));st.forEach(function(s,i){s.classList.toggle("on",p>(i+.35)/st.length-.05)})}
-window.addEventListener("scroll",sp,{passive:true});sp();
+function onScroll(){
+  if(tick)return;tick=true;
+  raf(function(){
+    tick=false;var y=Math.max(0,window.pageYOffset||0),dh=root.scrollHeight-window.innerHeight;
+    hd.classList.toggle("s",y>12);
+    prog.style.transform="scaleX("+(dh>0?Math.min(1,y/dh):0).toFixed(4)+")";
+    sp();
+    if(fine&&!reduced&&orbs&&y<1000&&window.innerWidth>900)orbs.style.setProperty("--py",(y*.14).toFixed(1)+"px");
+  });
+}
+window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",onScroll);onScroll();
 
-// preguntas frecuentes
-document.querySelectorAll(".q button").forEach(function(b){b.addEventListener("click",function(){var q=b.parentNode,o=q.classList.toggle("open");b.setAttribute("aria-expanded",o)})});
+// revelado al entrar en pantalla + pausa de animaciones fuera de vista
+var io=("IntersectionObserver" in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.1,rootMargin:"0px 0px -4% 0px"}):null;
+$$(".rv").forEach(function(n){if(io)io.observe(n);else n.classList.add("in")});
+if("IntersectionObserver" in window){var po=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("off",!e.isIntersecting)})},{threshold:0});$$("[data-pause]").forEach(function(n){po.observe(n)})}
+
+// botón principal con magnetismo (solo puntero fino)
+if(fine&&!reduced)$$(".btn.p").forEach(function(b){
+  b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();b.style.transform="translate("+((e.clientX-r.left-r.width/2)/r.width*10).toFixed(1)+"px,"+((e.clientY-r.top-r.height/2)/r.height*8).toFixed(1)+"px)"});
+  b.addEventListener("pointerleave",function(){b.style.transform=""});
+});
 
 // precio: cuenta hasta 49.99
 (function(){var n=el("n49"),done=false;if(reduced||!io)return;n.textContent="0.00";
- var o=new IntersectionObserver(function(es){if(es[0].isIntersecting&&!done){done=true;var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-k,3);n.textContent=(49.99*e).toFixed(2);if(k<1)requestAnimationFrame(f)})(t0);o.disconnect()}},{threshold:.5});o.observe(n)})();
+ var o=new IntersectionObserver(function(es){if(es[0].isIntersecting&&!done){done=true;var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-k,3);n.textContent=(49.99*e).toFixed(2);if(k<1)raf(f);else n.textContent="49.99"})(t0);o.disconnect()}},{threshold:.5});o.observe(n)})();
 
+// porcentajes de la búsqueda: cuentan al aparecer
+function countPct(node,txt){var to=parseInt(txt,10);if(reduced||isNaN(to)){node.textContent=txt;return}var t0=performance.now(),from=Math.max(0,to-40);(function f(t){var k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);node.textContent=Math.round(from+(to-from)*e)+"%";if(k<1)raf(f);else node.textContent=txt})(t0)}
 
 // búsqueda: escribe una consulta y aparecen los resultados
 (function(){
@@ -602,7 +776,7 @@ document.querySelectorAll(".q button").forEach(function(b){b.addEventListener("c
   var TC=[["00:12","02:48","05:03"],["01:30","04:11","07:25"],["03:05","06:40","09:12"]],SC=[["96%","91%","88%"],["94%","90%","85%"],["97%","92%","89%"]];
   var qi=0,vis=true;for(var pi=0;pi<9;pi++){(new Image()).src="img/search-"+pi+".jpg"}
   var vo=("IntersectionObserver" in window)?new IntersectionObserver(function(e){vis=e[0].isIntersecting}):null;if(vo)vo.observe(qt);
-  function show(){ths.forEach(function(t,i){t.style.setProperty("--g","linear-gradient(135deg,"+G[qi%3][i]+")");t.style.setProperty("--img","url(img/search-"+((qi%3)*3+i)+".jpg)");t.querySelector("i").textContent=TC[qi%3][i];t.querySelector("s").textContent=SC[qi%3][i];setTimeout(function(){t.classList.add("on")},160*i)})}
+  function show(){ths.forEach(function(t,i){t.style.setProperty("--g","linear-gradient(135deg,"+G[qi%3][i]+")");t.style.setProperty("--img","url(img/search-"+((qi%3)*3+i)+".jpg)");t.querySelector("i").textContent=TC[qi%3][i];countPct(t.querySelector("s"),SC[qi%3][i]);setTimeout(function(){t.classList.add("on")},160*i)})}
   if(reduced){qt.textContent=Q[lang][0];ths.forEach(function(t){t.classList.add("on")});return}
   function type(text,done){var i=0;(function f(){if(!vis){setTimeout(f,400);return}qt.textContent=text.slice(0,++i);if(i<text.length)setTimeout(f,55+Math.random()*50);else setTimeout(done,350)})()}
   function cycle(){ths.forEach(function(t){t.classList.remove("on")});qt.textContent="";
@@ -634,6 +808,9 @@ document.querySelectorAll(".q button").forEach(function(b){b.addEventListener("c
   }
   if(!reduced)requestAnimationFrame(frame);else{spd.textContent="2.0"}
 })();
+
+// estado inicial: enlace profundo o primera tarjeta abierta en escritorio
+if(!(location.hash&&route(location.hash))&&window.innerWidth>820)openMod("speed");
 })();
 </script>
 </body>
