@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RK SUITE · Speed ramps, subtítulos y música para DaVinci Resolve</title>
-<meta name="description" content="RK SUITE es el plugin para DaVinci Resolve Studio que crea speed ramps, subtítulos, marcadores de beats y mezclas de música en un clic. Licencia de pago único para 2 Macs.">
+<title>RK SUITE · Speed ramps, subtítulos, música y búsqueda con IA para DaVinci Resolve y Premiere Pro</title>
+<meta name="description" content="RK SUITE es el plugin para DaVinci Resolve Studio y Premiere Pro (beta) con speed ramps, subtítulos, marcadores de beats, música, sonidos y búsqueda con IA EmbeddingGemma 2, 100 % local. Pago único para 2 Macs.">
 <meta name="theme-color" content="#0E0F13">
-<meta property="og:title" content="RK SUITE · Speed ramps, subtítulos y música para DaVinci Resolve">
-<meta property="og:description" content="Speed ramps, subtítulos, beats y Automix en un clic. Plugin para DaVinci Resolve Studio en Mac. 49.99 USD, pago único.">
+<meta property="og:title" content="RK SUITE · Speed ramps, subtítulos, música y búsqueda con IA">
+<meta property="og:description" content="Speed ramps, subtítulos, música, sonidos y búsqueda con IA 100 % local. Plugin para DaVinci Resolve y Premiere Pro en Mac. 49.99 USD, pago único.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="logo.png">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
@@ -164,7 +164,7 @@ header.s{background:rgba(14,15,19,.72);backdrop-filter:saturate(1.6) blur(18px);
 .res{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
 .th{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;opacity:0;transform:translateY(14px) scale(.96);transition:opacity .5s var(--ease),transform .6s var(--ease)}
 .th.on{opacity:1;transform:none}
-.th::before{content:"";position:absolute;inset:0;background:var(--g);}
+.th::before{content:"";position:absolute;inset:0;background:var(--g);background-image:var(--img,var(--g));background-size:cover;background-position:center}
 .th::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%)}
 .th.on::after{animation:sweep 1.1s var(--ease) .15s 1 forwards}
 @keyframes sweep{to{transform:translateX(120%)}}
@@ -172,6 +172,90 @@ header.s{background:rgba(14,15,19,.72);backdrop-filter:saturate(1.6) blur(18px);
 .th s{position:absolute;right:8px;top:8px;text-decoration:none;font:600 11px var(--mono);padding:2px 7px;border-radius:6px;background:rgba(183,243,107,.92);color:var(--ink)}
 .sfoot{margin-top:14px;font-size:13.5px;color:var(--mut);text-align:center}
 @media (max-width:820px){.ai-grid{grid-template-columns:1fr;gap:36px}}
+/* módulos detallados */
+.mods{display:grid;gap:30px}
+.mod{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:40px;border-radius:26px;background:linear-gradient(180deg,var(--panel),#13151b);border:1px solid var(--line);transition:border-color var(--m-base)}
+.mod:hover{border-color:#3a4a28}
+.mod:nth-child(even) .mod-vis{order:-1}
+.mod-txt{min-width:0}
+.mod-hd{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.mod-hd .ic{margin-bottom:0}
+.mod-n{font:600 13px var(--mono);color:var(--mut);letter-spacing:.1em}
+.mod h3{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.02em;margin-top:10px}
+.hook{color:var(--txt);font-size:18px;margin-top:10px;opacity:.92}
+.pts{list-style:none;display:grid;gap:11px;margin:22px 0 0}
+.pts li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:#d3d5dc}
+.pts svg{flex:none;width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
+.mnote{margin-top:20px;padding:12px 14px;border-left:3px solid var(--lime);background:rgba(183,243,107,.06);border-radius:0 10px 10px 0;font-size:14.5px;color:var(--mut)}
+.mod-vis{min-width:0}
+.vbox{position:relative;border-radius:20px;background:#0b0c10;border:1px solid var(--line);padding:22px;overflow:hidden;min-height:250px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.vbox::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 0%,rgba(183,243,107,.10),transparent 70%);pointer-events:none}
+.v-curve{width:100%;height:auto;display:block;position:relative}
+.v-curve .g{stroke:#23262f;stroke-width:1;fill:none}
+.v-area{fill:rgba(183,243,107,.12)}
+.v-ln{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;stroke-dasharray:420;filter:drop-shadow(0 0 8px rgba(183,243,107,.5))}
+.v-dot{fill:#fff;filter:drop-shadow(0 0 8px var(--lime));offset-path:path("M10 140 C70 140 95 30 160 30 S250 140 310 140");offset-rotate:0deg}
+.mod.in .v-ln{animation:vdraw 2s var(--ease) both}
+.mod.in .v-dot{animation:vmove 5s ease-in-out 1.6s infinite}
+@keyframes vdraw{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+@keyframes vmove{0%{offset-distance:0%}50%{offset-distance:100%}100%{offset-distance:0%}}
+.v-tags{display:flex;justify-content:space-between;margin-top:8px;font:600 12px var(--mono);color:var(--mut);position:relative}
+.v-tags span:nth-child(2){color:var(--lime)}
+.v-frame{position:relative;border-radius:12px;background:linear-gradient(135deg,#2a3a1d,#1b2f3f 55%,#3a2740);aspect-ratio:16/9;display:flex;align-items:flex-end;justify-content:center;padding:14px;overflow:hidden}
+.v-cap{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .3em;font:800 clamp(20px,3vw,26px)/1.1 var(--font);letter-spacing:-.02em;text-align:center;margin-bottom:6%;text-shadow:0 2px 12px rgba(0,0,0,.7);color:#fff}
+.v-cap span{display:inline-block;opacity:.35}
+.v-cap .hl{color:var(--lime)}
+.mod.in .v-cap span{animation:vword 4.8s var(--ease) infinite;animation-delay:calc(var(--k)*.55s)}
+@keyframes vword{0%,8%{opacity:.35;transform:none}16%,70%{opacity:1;transform:translateY(-3px) scale(1.06)}84%,100%{opacity:.35;transform:none}}
+.v-lang{position:absolute;top:10px;right:10px;display:flex;gap:6px;align-items:center;font:700 11px var(--mono);background:rgba(8,9,12,.75);padding:4px 8px;border-radius:8px;color:var(--mut)}
+.v-lang b{color:var(--lime)}.v-lang i{font-style:normal}
+.v-trk{display:flex;gap:6px;margin-top:14px;position:relative}
+.v-trk i,.v-sfx i{display:block;height:14px;border-radius:5px;background:rgba(183,243,107,.28);width:var(--w)}
+.v-wave{display:flex;align-items:center;gap:4px;height:150px;position:relative}
+.v-wave i{flex:1;min-width:0;height:var(--h);border-radius:3px;background:#3b414f;transition:background var(--m-base)}
+.v-wave i.bm{background:#5b7a3a}
+.v-wave i.bt{background:var(--lime);box-shadow:0 0 10px rgba(183,243,107,.5)}
+.v-play{position:absolute;top:22px;bottom:22px;left:22px;width:2px;background:#fff;opacity:.85;box-shadow:0 0 10px #fff}
+.mod.in .v-play{animation:vsweep 6s linear infinite}
+.mod.in .v-wave i{animation:vbeat 6s linear infinite;animation-delay:calc(var(--b)*.15s)}
+@keyframes vsweep{from{left:22px}to{left:calc(100% - 24px)}}
+@keyframes vbeat{0%,4%{filter:brightness(1.7)}12%,100%{filter:none}}
+.v-tl{position:relative;display:flex;gap:2px;height:92px;border-radius:10px;overflow:visible}
+.v-clip{flex:1;border-radius:8px}
+.v-clip.a{background:linear-gradient(135deg,#2a3a1d,#1b2f3f)}
+.v-clip.b{background:linear-gradient(135deg,#3a2740,#1b2f3f)}
+.v-cutline{position:absolute;left:50%;top:-10px;bottom:-10px;width:2px;background:var(--lime);box-shadow:0 0 14px var(--lime)}
+.v-ping{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--lime);display:grid;place-items:center}
+.v-ping svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round}
+.mod.in .v-ping{animation:vping 2.6s var(--ease) infinite}
+@keyframes vping{0%{box-shadow:0 0 0 0 rgba(183,243,107,.6)}60%,100%{box-shadow:0 0 0 22px rgba(183,243,107,0)}}
+.v-sfx{display:flex;gap:10px;margin-top:22px;justify-content:center;position:relative}
+.v-sfx i{background:rgba(255,166,77,.55)}
+/* búsqueda: sección estrella */
+.ai{padding-bottom:96px}
+.ai-grid{align-items:start}
+.exh{margin-top:20px;font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.exs{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.ex{padding:8px 14px;border-radius:999px;border:1px dashed #3a4a28;background:rgba(183,243,107,.05);color:var(--txt);font-size:15px}
+.ai-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:56px}
+.aic{padding:26px 24px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line)}
+.aic .ic{margin-bottom:16px}.aic p{color:var(--mut);font-size:15.5px;margin-top:10px}.aic p b{color:var(--lime);font-weight:600}
+.tm{margin-top:26px;text-align:center;color:var(--mut);font-size:13.5px}
+.newchip{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px;margin:-4px 0 22px;padding:7px 16px 7px 8px;border-radius:999px;border:1px solid #3a4a28;background:rgba(183,243,107,.08);font-size:15px;max-width:100%;transition:border-color var(--m-fast),transform var(--m-base) var(--spring),background var(--m-fast)}
+.newchip:hover{border-color:var(--lime);background:rgba(183,243,107,.14);transform:translateY(-2px)}
+.newchip b{background:var(--lime);color:var(--ink);font:700 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.newchip em{font-style:normal;color:var(--lime)}
+@media (max-width:820px){
+  .mod{grid-template-columns:1fr;gap:28px;padding:26px 20px}
+  .mod:nth-child(even) .mod-vis{order:0}
+  .vbox{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .v-ln{stroke-dashoffset:0!important}
+  .v-dot{offset-distance:50%!important}
+  .v-cap span{opacity:1!important}
+}
+
 footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-size:15px}
 .fgrid{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:center}
 .fl{display:flex;flex-wrap:wrap;gap:8px 24px}.fl a:hover{color:var(--lime)}
@@ -208,7 +292,8 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
 <section class="hero">
   <div class="grid-bg"></div><div class="orb o1"></div><div class="orb o2"></div>
   <div class="wrap">
-    <div class="eyebrow rv"><i></i><span data-i="eyebrow">Para DaVinci Resolve Studio · Mac con Apple Silicon</span></div>
+    <div class="eyebrow rv"><i></i><span data-i="eyebrow">Para DaVinci Resolve Studio y Premiere Pro (beta) · Mac con Apple Silicon</span></div>
+    <a class="newchip rv" href="#busqueda" style="--d:2"><b data-i="nw_b">Nuevo</b><span data-i="nw_t">Búsqueda con IA EmbeddingGemma 2, 100 % local</span><em aria-hidden="true">→</em></a>
     <h1 id="h1" aria-label="Speed ramps, subtítulos y música. En un clic."></h1>
     <p class="lead rv" style="--d:5;margin-top:26px" data-i="lead">RK SUITE convierte horas de edición en segundos. Hecho por un editor, pensado para que cualquiera lo entienda.</p>
     <div class="cta rv" style="--d:6">
@@ -245,35 +330,112 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
 
 <section id="modulos">
   <div class="wrap">
-    <div class="sec-h rv"><div class="eyebrow"><span data-i="m_e">Cuatro módulos</span></div><h2 data-i="m_h">Todo lo que necesitas. Nada que te estorbe.</h2><p class="lead" data-i="m_p">Cada módulo hace una cosa y tiene un botón verde. Lo demás está escondido hasta que lo necesites.</p></div>
-    <div class="cards">
-      <article class="card rv" style="--d:0"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 18C8 18 9 5 12 5s4 13 9 13"/><circle cx="12" cy="5" r="1.6" fill="currentColor"/></svg></div><h3 data-i="c1h">Speedramp</h3><p data-i="c1p">Dibuja una curva de velocidad y aplícala a tu clip. Se ajusta sola a la duración y sigue el ritmo de tu edición.</p></article>
-      <article class="card rv" style="--d:1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 11h6M7 15h10"/></svg></div><h3 data-i="c2h">Subtítulos</h3><p data-i="c2p">Transcribe tu audio, elige el idioma y escribe los subtítulos en tu timeline, con animación palabra por palabra.</p></article>
-      <article class="card rv" style="--d:2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></div><h3 data-i="c3h">Música</h3><p data-i="c3p">Marca los beats y compases, mezcla dos canciones con el tempo emparejado (Automix) y despídete con un reverb final.</p></article>
-      <article class="card rv" style="--d:3"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div><h3 data-i="c4h">Sonidos</h3><p data-i="c4p">Añade efectos de sonido a tus transiciones y cortes, colocados justo donde suenan mejor.</p></article>
+    <div class="sec-h rv"><div class="eyebrow"><span data-i="m_e">Cuatro módulos y una búsqueda con IA</span></div><h2 data-i="m_h">Todo lo que necesitas. Nada que te estorbe.</h2><p class="lead" data-i="m_p">Cada módulo tiene su botón verde y hace bien una sola cosa. Esto es lo que hace cada uno.</p></div>
+    <div class="mods">
+      <article class="mod rv" id="mod-speed">
+        <div class="mod-txt">
+          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 18C8 18 9 5 12 5s4 13 9 13"/><circle cx="12" cy="5" r="1.6" fill="currentColor"/></svg></div><span class="mod-n">01</span></div>
+          <h3 data-i="m1h">Speedramp</h3>
+          <p class="hook" data-i="m1g">Acelera y frena justo donde quieres, sin keyframes a mano.</p>
+          <ul class="pts">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p1">Dibujas una curva de velocidad: arrastra un punto arriba o abajo para cambiar la velocidad, a los lados para cambiar el momento.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p2">Presets listos (Golpe lento, Whip, Acelera, Frena, Doble golpe…) y puedes guardar los tuyos.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p3">La curva se ajusta a la duración del clip, o fijas la duración final en segundos.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p4">«Conservar los momentos» ancla cada punto a una imagen del video para que el golpe caiga donde lo pusiste.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p5">Motion blur automático en los tramos rápidos y calidad de cuadros ajustable (Nítido, Mezcla u Optical Flow).</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m1p6">Transición RK Whip en el corte y botón para deshacer la última rampa.</span></li>
+          </ul>
+          <p class="mnote" data-i="m1n">En DaVinci la rampa vive en el mismo clip (Fusion). En Premiere se aplica con un efecto de RK, no con el Time Remapping nativo. El audio no sigue la curva.</p>
+        </div>
+        <div class="mod-vis" aria-hidden="true"><div class="vbox v-speed"><svg class="v-curve" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet"><g class="g"><path d="M0 42H320M0 85H320M0 128H320M80 0V170M160 0V170M240 0V170"/></g><path class="v-area" d="M10 140 C70 140 95 30 160 30 S250 140 310 140 V170 H10Z"/><path class="v-ln" d="M10 140 C70 140 95 30 160 30 S250 140 310 140"/><circle class="v-dot" r="7" cx="10" cy="140"/><circle cx="160" cy="30" r="5" fill="#0E0F13" stroke="#B7F36B" stroke-width="2.5"/></svg><div class="v-tags"><span>0.3×</span><span>1×</span><span>4×</span></div></div></div>
+      </article>
+      <article class="mod rv" id="mod-subs">
+        <div class="mod-txt">
+          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 11h6M7 15h10"/></svg></div><span class="mod-n">02</span></div>
+          <h3 data-i="m2h">Subtítulos</h3>
+          <p class="hook" data-i="m2g">De la voz al texto en el timeline, en un clic y sin salir de tu Mac.</p>
+          <ul class="pts">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p1">Flujo de un clic: transcribe, traduce si hace falta y escribe los subtítulos en tu timeline.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p2">Eliges el idioma del audio y el de los subtítulos: español, inglés, portugués, francés, alemán o italiano.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p3">La transcripción se hace en tu Mac, sin internet, y se guarda para no repetirla.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p4">Revisa y corrige el texto de cada caja conservando los tiempos; marca palabras clave con un clic.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p5">Estilos de corte (Social, Reels, Estándar, Cine), fuentes, contorno, sombra y animación palabra por palabra.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m2p6">Quita muletillas (eh, um…) solo del texto y exporta a SRT, VTT o JSON por palabra.</span></li>
+          </ul>
+          <p class="mnote" data-i="m2n">Los subtítulos y la traducción necesitan macOS 26 o superior.</p>
+        </div>
+        <div class="mod-vis" aria-hidden="true"><div class="vbox v-subs"><div class="v-frame"><div class="v-cap"><span style="--k:0"><span data-i="vw1">Edita</span></span> <span style="--k:1"><span data-i="vw2">menos.</span></span> <span style="--k:2" class="hl"><span data-i="vw3">Crea</span></span> <span style="--k:3"><span data-i="vw4">más.</span></span></div><div class="v-lang"><b>ES</b><i>⇄</i><b>EN</b></div></div><div class="v-trk"><i style="--w:34%"></i><i style="--w:22%"></i><i style="--w:30%"></i></div></div></div>
+      </article>
+      <article class="mod rv" id="mod-music">
+        <div class="mod-txt">
+          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></div><span class="mod-n">03</span></div>
+          <h3 data-i="m3h">Música</h3>
+          <p class="hook" data-i="m3g">Corta a ritmo: tu canción ya viene marcada en el timeline.</p>
+          <ul class="pts">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p1">Marcadores de beat por compases, frases (4 compases) o cada beat, con los drops en rojo.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p2">Modo «Golpes»: marca solo los golpes fuertes de la canción.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p3">«Pulso manual»: escribes o tocas el tempo, pones el «1» en el cursor y afinas con corrimiento fino.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p4">Reverb final: deja una cola de eco después del último sonido para terminar la canción.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p5">Efectos de audio y transiciones entre dos canciones (Tape stop, Rewind, Riser) con volumen igualado.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m3p6">Automix: mezcla tipo DJ que empata el tempo de dos canciones sin cambiar el tono.</span></li>
+          </ul>
+          <p class="mnote" data-i="m3n">Automix solo está disponible en DaVinci Resolve por ahora.</p>
+        </div>
+        <div class="mod-vis" aria-hidden="true"><div class="vbox v-music"><div class="v-wave"><i class="bt" style="--h:32%;--b:0"></i><i style="--h:62%;--b:1"></i><i style="--h:65%;--b:2"></i><i style="--h:33%;--b:3"></i><i class="bm" style="--h:40%;--b:4"></i><i style="--h:19%;--b:5"></i><i style="--h:31%;--b:6"></i><i style="--h:18%;--b:7"></i><i class="bt" style="--h:69%;--b:8"></i><i style="--h:72%;--b:9"></i><i style="--h:42%;--b:10"></i><i style="--h:44%;--b:11"></i><i class="bm" style="--h:81%;--b:12"></i><i style="--h:46%;--b:13"></i><i style="--h:18%;--b:14"></i><i style="--h:21%;--b:15"></i><i class="bt" style="--h:46%;--b:16"></i><i style="--h:30%;--b:17"></i><i style="--h:39%;--b:18"></i><i style="--h:72%;--b:19"></i><i class="bm" style="--h:76%;--b:20"></i><i style="--h:20%;--b:21"></i><i style="--h:59%;--b:22"></i><i style="--h:56%;--b:23"></i><i class="bt" style="--h:41%;--b:24"></i><i style="--h:21%;--b:25"></i><i style="--h:30%;--b:26"></i><i style="--h:39%;--b:27"></i><i class="bm" style="--h:34%;--b:28"></i><i style="--h:62%;--b:29"></i><i style="--h:74%;--b:30"></i><i style="--h:39%;--b:31"></i><i class="bt" style="--h:58%;--b:32"></i><i style="--h:59%;--b:33"></i><i style="--h:37%;--b:34"></i><i style="--h:18%;--b:35"></i><i class="bm" style="--h:40%;--b:36"></i><i style="--h:44%;--b:37"></i><i style="--h:32%;--b:38"></i><i style="--h:45%;--b:39"></i></div><div class="v-play"></div></div></div>
+      </article>
+      <article class="mod rv" id="mod-sfx">
+        <div class="mod-txt">
+          <div class="mod-hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div><span class="mod-n">04</span></div>
+          <h3 data-i="m4h">Sonidos</h3>
+          <p class="hook" data-i="m4g">Efectos de sonido en tus cortes y transiciones, sacados de tu propia biblioteca.</p>
+          <ul class="pts">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p1">Usas tu propia biblioteca de efectos: agregas tus carpetas y RK las lee sin copiar tus archivos.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p2">Detecta las rampas y transiciones hechas con RK (cuadro exacto, duración e intensidad) y propone 3 sonidos para cada una.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p3">Tú decides la cantidad (pocos, normal, muchos) y el volumen (suave, normal, fuerte).</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p4">Recorte inteligente: entrada corta, golpe en el corte y cola con fundido.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p5">Los sonidos van a pistas de audio aparte, tus clips no se tocan, y puedes deshacer el último lote.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="m4p6">Funciona sin internet; solo se importa a tu proyecto el sonido que se usa.</span></li>
+          </ul>
+          <p class="mnote" data-i="m4n">Necesitas tu propia biblioteca de efectos de sonido; RK SUITE no la sustituye.</p>
+        </div>
+        <div class="mod-vis" aria-hidden="true"><div class="vbox v-sfx"><div class="v-tl"><div class="v-clip a"></div><div class="v-clip b"></div><div class="v-cutline"></div><div class="v-ping"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></div></div><div class="v-sfx"><i style="--w:12%"></i><i style="--w:8%"></i><i style="--w:16%"></i></div></div></div>
+      </article>
     </div>
   </div>
 </section>
 
 <section id="busqueda" class="ai">
-  <div class="wrap ai-grid">
+  <div class="wrap">
+  <div class="ai-grid">
     <div>
-      <div class="eyebrow rv"><span data-i="ai_e">Búsqueda inteligente</span></div>
-      <h2 class="rv" style="--d:1" data-i="ai_h">Escribe lo que buscas. Encuentra el momento exacto.</h2>
-      <p class="lead rv" style="--d:2" data-i="ai_p">Olvídate de ver horas de material. Describe la escena con tus palabras y RK SUITE te lleva al cuadro en tus clips.</p>
+      <div class="eyebrow rv"><span data-i="ai_e">Nuevo · La estrella de RK SUITE</span></div>
+      <h2 class="rv" style="--d:1" data-i="ai_h">Búsqueda con EmbeddingGemma 2</h2>
+      <p class="lead rv" style="--d:2" data-i="ai_p">Describe la escena con tus palabras y RK SUITE te lleva al cuadro exacto dentro de tus videos. Olvídate de ver horas de material.</p>
       <div class="chips rv" style="--d:3">
         <span class="chip"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span data-i="ai_c1">100 % en tu Mac</span></span>
         <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span data-i="ai_c2">Complemento opcional</span></span>
         <span class="chip exp"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg><span data-i="ai_c3">Experimental</span></span>
       </div>
       <div class="powered rv" style="--d:4"><div class="gem"><svg viewBox="0 0 24 24"><path d="M6 4h12l4 6-10 11L2 10z"/><path d="M2 10h20M9 4l3 17M15 4l-3 17"/></svg></div>
-        <p><b data-i="ai_pw">Impulsado por EmbeddingGemma 2</b><span data-i="ai_pws">Modelo abierto de Google DeepMind (licencia Apache 2.0) que corre en tu propio Mac.</span></p></div>
+        <p><b data-i="ai_pw">Impulsado por EmbeddingGemma 2</b><span data-i="ai_pws">Modelo abierto de Google DeepMind (etiquetado Apache 2.0 en Hugging Face; pueden aplicar los términos de Gemma). Corre en tu propio Mac.</span></p></div>
     </div>
-    <div class="sbox rv" style="--d:3" aria-hidden="true">
-      <div class="sbar"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span id="qt"></span><span class="caret"></span></div>
-      <div class="res" id="res"><div class="th" style="--g:linear-gradient(135deg,#3b2f1a,#d98b3a 60%,#f1c27a)"><i>00:12</i><s>96%</s></div><div class="th" style="--g:linear-gradient(135deg,#1c2f3b,#3a8bd9 60%,#8fd3ff)"><i>02:48</i><s>91%</s></div><div class="th" style="--g:linear-gradient(135deg,#2a1c3b,#9a3ad9 60%,#e0a3ff)"><i>05:03</i><s>88%</s></div></div>
-      <p class="sfoot" data-i="ai_f">Ejemplo ilustrativo. Tus videos se analizan en tu computadora y nada se sube a internet.</p>
+    <div class="rv" style="--d:3">
+      <div class="sbox" aria-hidden="true">
+        <div class="sbar"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span id="qt"></span><span class="caret"></span></div>
+        <div class="res" id="res"><div class="th" style="--g:linear-gradient(135deg,#3b2f1a,#d98b3a 60%,#f1c27a)"><i>00:12</i><s>96%</s></div><div class="th" style="--g:linear-gradient(135deg,#1c2f3b,#3a8bd9 60%,#8fd3ff)"><i>02:48</i><s>91%</s></div><div class="th" style="--g:linear-gradient(135deg,#2a1c3b,#9a3ad9 60%,#e0a3ff)"><i>05:03</i><s>88%</s></div></div>
+        <p class="sfoot" data-i="ai_f">Ejemplo ilustrativo. Tus videos se analizan en tu computadora y nada se sube a internet.</p>
+      </div>
+      <p class="exh" data-i="ai_exh">Prueba buscando cosas como…</p>
+      <div class="exs"><span class="ex" data-i="ai_ex1">«personas sonriendo en la playa»</span><span class="ex" data-i="ai_ex2">«dron sobre el volcán al amanecer»</span><span class="ex" data-i="ai_ex3">«primer plano de manos escribiendo»</span></div>
     </div>
+  </div>
+  <div class="ai-cols">
+    <div class="aic rv" style="--d:0"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div><h3 data-i="ai_w1h">Qué hace</h3><p data-i="ai_w1p">Escribes lo que buscas, con tus palabras, en español o inglés. EmbeddingGemma 2 entiende el significado de lo que ves en tus videos y RK SUITE te lleva al cuadro, listo para insertarlo en tu timeline. Busca solo en video.</p></div>
+    <div class="aic rv" style="--d:1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3 data-i="ai_w2h">100 % local y privado</h3><p data-i="ai_w2p">La IA corre por completo en tu Mac. Tus videos no se suben a internet ni se copian: solo se indexan en tu computadora.</p></div>
+    <div class="aic rv" style="--d:2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div><h3 data-i="ai_w3h">Cómo se activa</h3><p data-i="ai_w3p">Es un complemento opcional que se instala desde el panel de RK SUITE. Se abre un instalador en la Terminal que te muestra las licencias y te pide escribir ACEPTO (ACCEPT si tu Terminal está en inglés) para continuar. Después agregas tus carpetas e indexas.</p></div>
+    <div class="aic rv" style="--d:3"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3 data-i="ai_w4h">Qué necesitas</h3><p data-i="ai_w4p">Mac con Apple Silicon y macOS 14 o superior. El complemento descarga unos 2.4 GB. Es una función <b>experimental</b> y se ofrece sin garantía.</p></div>
+  </div>
+  <p class="tm rv" data-i="ai_tm">EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.</p>
   </div>
 </section>
 
@@ -307,8 +469,9 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
       <div class="sec-h rv" style="margin-bottom:28px"><h2 data-i="r_h">Antes de comprar</h2></div>
       <div class="req">
         <div class="rv" style="--d:1"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><p><b data-i="r1h">Mac con Apple Silicon</b><span data-i="r1p">M1, M2, M3, M4 o M5. macOS 12 o superior.</span></p></div>
-        <div class="rv" style="--d:2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p><b data-i="r2h">DaVinci Resolve Studio 21</b><span data-i="r2p">Los plugins de Resolve no funcionan en la versión gratuita.</span></p></div>
+        <div class="rv" style="--d:2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p><b data-i="r2h">DaVinci Resolve Studio 21 o Premiere Pro</b><span data-i="r2p">Los plugins de Resolve no funcionan en la versión gratuita. El panel de Premiere está en beta.</span></p></div>
         <div class="rv" style="--d:3"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><p><b data-i="r3h">Subtítulos y traducción</b><span data-i="r3p">Necesitan macOS 26 o superior. El resto funciona desde macOS 12.</span></p></div>
+        <div class="rv" style="--d:4"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><p><b data-i="r4h">Búsqueda con IA (opcional)</b><span data-i="r4p">Apple Silicon y macOS 14 o superior. Complemento de unos 2.4 GB.</span></p></div>
       </div>
     </div>
   </div>
@@ -319,8 +482,9 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mut);font-siz
     <div class="sec-h rv" style="margin:0 auto 40px;text-align:center"><h2 data-i="f_h">Preguntas frecuentes</h2></div>
     <div class="faq" id="faqs">
       <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q1">¿Funciona con la versión gratuita de DaVinci Resolve?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a1">No. Los plugins de Workflow Integration solo funcionan en DaVinci Resolve Studio, que es la versión de pago de Blackmagic.</p></div></div></div>
-      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q2">¿Y en Premiere Pro?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a2">Hoy RK SUITE es para DaVinci Resolve. La versión de Premiere Pro está en pruebas y llegará más adelante.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q2">¿Y en Premiere Pro?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a2">Sí. RK SUITE también tiene panel para Adobe Premiere Pro, que está en beta: puede tener detalles por pulir y algunas funciones, como Automix, son solo de DaVinci por ahora. En Premiere la rampa se aplica con un efecto de RK, no con el Time Remapping nativo.</p></div></div></div>
       <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q3">¿Mis videos se suben a algún lado?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a3">No. Todo se procesa en tu Mac: tus videos, tu audio y tus subtítulos no salen de tu computadora. Solo se comprueba tu licencia por internet.</p></div></div></div>
+      <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q7">¿Qué es la búsqueda con EmbeddingGemma 2?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a7">Es un complemento opcional y experimental: describes una escena con tus palabras y te lleva al cuadro dentro de tus videos. La IA corre 100 % en tu Mac y tus videos no se suben a internet. Necesita Apple Silicon, macOS 14 o superior y unos 2.4 GB de descarga.</p></div></div></div>
       <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q4">¿Qué pasa si cambio de Mac?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a4">Tu llave sirve en 2 Macs. Desactiva uno desde el plugin y activa el nuevo cuando quieras.</p></div></div></div>
       <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q5">macOS dice que no puede verificar el instalador</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p data-i="a5">Es normal la primera vez: el instalador no está firmado con una cuenta de desarrollador de Apple. Ve a Ajustes del Sistema › Privacidad y seguridad, baja hasta el aviso del instalador y pulsa «Abrir de todos modos». Solo se pide una vez.</p></div></div></div>
       <div class="q rv"><button type="button" aria-expanded="false"><span data-i="q6">¿Cómo recibo ayuda?</span><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p><span data-i="a6">Escríbenos a</span> <a href="mailto:alexanderpineda07@gmail.com" style="color:var(--lime)">alexanderpineda07@gmail.com</a>. <span data-i="a6b">Respondemos personalmente.</span></p></div></div></div>
@@ -342,10 +506,10 @@ var CHECKOUT_URL = "";   // p. ej. "https://tutienda.lemonsqueezy.com/checkout/b
 var SUPPORT = "alexanderpineda07@gmail.com";
 
 var T = {
-es:{v_e:"Míralo en acción",v_h:"30 segundos para entenderlo todo.",ai_e:"Búsqueda inteligente",ai_h:"Escribe lo que buscas. Encuentra el momento exacto.",ai_p:"Olvídate de ver horas de material. Describe la escena con tus palabras y RK SUITE te lleva al cuadro en tus clips.",ai_c1:"100 % en tu Mac",ai_c2:"Complemento opcional",ai_c3:"Experimental",ai_pw:"Impulsado por EmbeddingGemma 2",ai_pws:"Modelo abierto de Google DeepMind (licencia Apache 2.0) que corre en tu propio Mac.",ai_f:"Ejemplo ilustrativo. Tus videos se analizan en tu computadora y nada se sube a internet.",attr:"EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.",n1:"Qué hace",n2:"Cómo se usa",n3:"Precio",n4:"Preguntas",eyebrow:"Para DaVinci Resolve Studio · Mac con Apple Silicon",
+es:{m_e:"Cuatro módulos y una búsqueda con IA",m_h:"Todo lo que necesitas. Nada que te estorbe.",m_p:"Cada módulo tiene su botón verde y hace bien una sola cosa. Esto es lo que hace cada uno.",vw1:"Edita",vw2:"menos.",vw3:"Crea",vw4:"más.",m1h:"Speedramp",m1g:"Acelera y frena justo donde quieres, sin keyframes a mano.",m1n:"En DaVinci la rampa vive en el mismo clip (Fusion). En Premiere se aplica con un efecto de RK, no con el Time Remapping nativo. El audio no sigue la curva.",m1p1:"Dibujas una curva de velocidad: arrastra un punto arriba o abajo para cambiar la velocidad, a los lados para cambiar el momento.",m1p2:"Presets listos (Golpe lento, Whip, Acelera, Frena, Doble golpe…) y puedes guardar los tuyos.",m1p3:"La curva se ajusta a la duración del clip, o fijas la duración final en segundos.",m1p4:"«Conservar los momentos» ancla cada punto a una imagen del video para que el golpe caiga donde lo pusiste.",m1p5:"Motion blur automático en los tramos rápidos y calidad de cuadros ajustable (Nítido, Mezcla u Optical Flow).",m1p6:"Transición RK Whip en el corte y botón para deshacer la última rampa.",m2h:"Subtítulos",m2g:"De la voz al texto en el timeline, en un clic y sin salir de tu Mac.",m2n:"Los subtítulos y la traducción necesitan macOS 26 o superior.",m2p1:"Flujo de un clic: transcribe, traduce si hace falta y escribe los subtítulos en tu timeline.",m2p2:"Eliges el idioma del audio y el de los subtítulos: español, inglés, portugués, francés, alemán o italiano.",m2p3:"La transcripción se hace en tu Mac, sin internet, y se guarda para no repetirla.",m2p4:"Revisa y corrige el texto de cada caja conservando los tiempos; marca palabras clave con un clic.",m2p5:"Estilos de corte (Social, Reels, Estándar, Cine), fuentes, contorno, sombra y animación palabra por palabra.",m2p6:"Quita muletillas (eh, um…) solo del texto y exporta a SRT, VTT o JSON por palabra.",m3h:"Música",m3g:"Corta a ritmo: tu canción ya viene marcada en el timeline.",m3n:"Automix solo está disponible en DaVinci Resolve por ahora.",m3p1:"Marcadores de beat por compases, frases (4 compases) o cada beat, con los drops en rojo.",m3p2:"Modo «Golpes»: marca solo los golpes fuertes de la canción.",m3p3:"«Pulso manual»: escribes o tocas el tempo, pones el «1» en el cursor y afinas con corrimiento fino.",m3p4:"Reverb final: deja una cola de eco después del último sonido para terminar la canción.",m3p5:"Efectos de audio y transiciones entre dos canciones (Tape stop, Rewind, Riser) con volumen igualado.",m3p6:"Automix: mezcla tipo DJ que empata el tempo de dos canciones sin cambiar el tono.",m4h:"Sonidos",m4g:"Efectos de sonido en tus cortes y transiciones, sacados de tu propia biblioteca.",m4n:"Necesitas tu propia biblioteca de efectos de sonido; RK SUITE no la sustituye.",m4p1:"Usas tu propia biblioteca de efectos: agregas tus carpetas y RK las lee sin copiar tus archivos.",m4p2:"Detecta las rampas y transiciones hechas con RK (cuadro exacto, duración e intensidad) y propone 3 sonidos para cada una.",m4p3:"Tú decides la cantidad (pocos, normal, muchos) y el volumen (suave, normal, fuerte).",m4p4:"Recorte inteligente: entrada corta, golpe en el corte y cola con fundido.",m4p5:"Los sonidos van a pistas de audio aparte, tus clips no se tocan, y puedes deshacer el último lote.",m4p6:"Funciona sin internet; solo se importa a tu proyecto el sonido que se usa.",ai_e:"Nuevo · La estrella de RK SUITE",ai_h:"Búsqueda con EmbeddingGemma 2",ai_p:"Describe la escena con tus palabras y RK SUITE te lleva al cuadro exacto dentro de tus videos. Olvídate de ver horas de material.",ai_c1:"100 % en tu Mac",ai_c2:"Complemento opcional",ai_c3:"Experimental",ai_pw:"Impulsado por EmbeddingGemma 2",ai_pws:"Modelo abierto de Google DeepMind (etiquetado Apache 2.0 en Hugging Face; pueden aplicar los términos de Gemma). Corre en tu propio Mac.",ai_f:"Ejemplo ilustrativo. Tus videos se analizan en tu computadora y nada se sube a internet.",ai_exh:"Prueba buscando cosas como…",ai_ex1:"«personas sonriendo en la playa»",ai_ex2:"«dron sobre el volcán al amanecer»",ai_ex3:"«primer plano de manos escribiendo»",ai_w1h:"Qué hace",ai_w1p:"Escribes lo que buscas, con tus palabras, en español o inglés. EmbeddingGemma 2 entiende el significado de lo que ves en tus videos y RK SUITE te lleva al cuadro, listo para insertarlo en tu timeline. Busca solo en video.",ai_w2h:"100 % local y privado",ai_w2p:"La IA corre por completo en tu Mac. Tus videos no se suben a internet ni se copian: solo se indexan en tu computadora.",ai_w3h:"Cómo se activa",ai_w3p:"Es un complemento opcional que se instala desde el panel de RK SUITE. Se abre un instalador en la Terminal que te muestra las licencias y te pide escribir ACEPTO (ACCEPT si tu Terminal está en inglés) para continuar. Después agregas tus carpetas e indexas.",ai_w4h:"Qué necesitas",ai_w4p:"Mac con Apple Silicon y macOS 14 o superior. El complemento descarga unos 2.4 GB. Es una función <b>experimental</b> y se ofrece sin garantía.",ai_tm:"EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.",nw_b:"Nuevo",nw_t:"Búsqueda con IA EmbeddingGemma 2, 100 % local",eyebrow:"Para DaVinci Resolve Studio y Premiere Pro (beta) · Mac con Apple Silicon",q2:"¿Y en Premiere Pro?",a2:"Sí. RK SUITE también tiene panel para Adobe Premiere Pro, que está en beta: puede tener detalles por pulir y algunas funciones, como Automix, son solo de DaVinci por ahora. En Premiere la rampa se aplica con un efecto de RK, no con el Time Remapping nativo.",q7:"¿Qué es la búsqueda con EmbeddingGemma 2?",a7:"Es un complemento opcional y experimental: describes una escena con tus palabras y te lleva al cuadro dentro de tus videos. La IA corre 100 % en tu Mac y tus videos no se suben a internet. Necesita Apple Silicon, macOS 14 o superior y unos 2.4 GB de descarga.",r2h:"DaVinci Resolve Studio 21 o Premiere Pro",r2p:"Los plugins de Resolve no funcionan en la versión gratuita. El panel de Premiere está en beta.",r4h:"Búsqueda con IA (opcional)",r4p:"Apple Silicon y macOS 14 o superior. Complemento de unos 2.4 GB.",v_e:"Míralo en acción",v_h:"30 segundos para entenderlo todo.",attr:"EmbeddingGemma y Gemma son marcas de Google LLC. RK SUITE es un producto independiente y no está afiliado ni respaldado por Google.",n1:"Qué hace",n2:"Cómo se usa",n3:"Precio",n4:"Preguntas",
  h1:"Speed ramps, subtítulos y música. En un clic.",lead:"RK SUITE convierte horas de edición en segundos. Hecho por un editor, pensado para que cualquiera lo entienda.",
  buy:"Comprar · 49.99 USD",buyw:"Ver precio · 49.99 USD",how:"Ver qué hace",t1:"Pago único, sin suscripción",t2:"Licencia para 2 Macs",t3:"Todo se procesa en tu Mac",cap:"Dibujas la curva. Tu clip acelera y frena justo donde quieres.",
- m_e:"Cuatro módulos",m_h:"Todo lo que necesitas. Nada que te estorbe.",m_p:"Cada módulo hace una cosa y tiene un botón verde. Lo demás está escondido hasta que lo necesites.",
+ 
  c1h:"Speedramp",c1p:"Dibuja una curva de velocidad y aplícala a tu clip. Se ajusta sola a la duración y sigue el ritmo de tu edición.",
  c2h:"Subtítulos",c2p:"Transcribe tu audio, elige el idioma y escribe los subtítulos en tu timeline, con animación palabra por palabra.",
  c3h:"Música",c3p:"Marca los beats y compases, mezcla dos canciones con el tempo emparejado (Automix) y despídete con un reverb final.",
@@ -354,17 +518,17 @@ es:{v_e:"Míralo en acción",v_h:"30 segundos para entenderlo todo.",ai_e:"Búsq
  s2h:"Ábrelo en Resolve",s2p:"En Resolve ve a Workspace › Workflow Integrations › RK SUITE.",s3h:"Pulsa el botón verde",s3p:"Elige un módulo, ajusta si quieres y aplica. Siempre puedes deshacer.",
  p_e:"Licencia RK SUITE",p_s:"Un solo pago. Sin suscripción.",p1:"Funciona en <b>2 Macs</b> a la vez",p2:"Todas las actualizaciones de la versión <b>1.x</b>",p3:"Llave e instalador <b>al instante</b>",p4:"Soporte directo <b>por correo</b>",
  buy2:"Comprar ahora",buy2w:"Avísame cuando abra",fine:"Pago seguro. Recibes tu llave y el instalador al instante.",finew:"La tienda abre muy pronto. Déjanos tu correo y te avisamos.",
- r_h:"Antes de comprar",r1h:"Mac con Apple Silicon",r1p:"M1, M2, M3, M4 o M5. macOS 12 o superior.",r2h:"DaVinci Resolve Studio 21",r2p:"Los plugins de Resolve no funcionan en la versión gratuita.",r3h:"Subtítulos y traducción",r3p:"Necesitan macOS 26 o superior. El resto funciona desde macOS 12.",
+ r_h:"Antes de comprar",r1h:"Mac con Apple Silicon",r1p:"M1, M2, M3, M4 o M5. macOS 12 o superior.",r3h:"Subtítulos y traducción",r3p:"Necesitan macOS 26 o superior. El resto funciona desde macOS 12.",
  f_h:"Preguntas frecuentes",q1:"¿Funciona con la versión gratuita de DaVinci Resolve?",a1:"No. Los plugins de Workflow Integration solo funcionan en DaVinci Resolve Studio, que es la versión de pago de Blackmagic.",
- q2:"¿Y en Premiere Pro?",a2:"Hoy RK SUITE es para DaVinci Resolve. La versión de Premiere Pro está en pruebas y llegará más adelante.",
+ 
  q3:"¿Mis videos se suben a algún lado?",a3:"No. Todo se procesa en tu Mac: tus videos, tu audio y tus subtítulos no salen de tu computadora. Solo se comprueba tu licencia por internet.",
  q4:"¿Qué pasa si cambio de Mac?",a4:"Tu llave sirve en 2 Macs. Desactiva uno desde el plugin y activa el nuevo cuando quieras.",
  q5:"macOS dice que no puede verificar el instalador",a5:"Es normal la primera vez: el instalador no está firmado con una cuenta de desarrollador de Apple. Ve a Ajustes del Sistema › Privacidad y seguridad, baja hasta el aviso del instalador y pulsa «Abrir de todos modos». Solo se pide una vez.",
  q6:"¿Cómo recibo ayuda?",a6:"Escríbenos a",a6b:"Respondemos personalmente.",fo:"Hecho en Guatemala por REDKAM",l1:"Términos de uso",l2:"Privacidad",l3:"Reembolsos"},
-en:{v_e:"See it in action",v_h:"30 seconds to get it all.",ai_e:"Smart search",ai_h:"Type what you are looking for. Find the exact moment.",ai_p:"Stop watching hours of footage. Describe the scene in your own words and RK SUITE takes you to the frame in your clips.",ai_c1:"100% on your Mac",ai_c2:"Optional add-on",ai_c3:"Experimental",ai_pw:"Powered by EmbeddingGemma 2",ai_pws:"Open model from Google DeepMind (Apache 2.0 license) running on your own Mac.",ai_f:"Illustrative example. Your videos are analyzed on your computer and nothing is uploaded to the internet.",attr:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",n1:"What it does",n2:"How it works",n3:"Price",n4:"FAQ",eyebrow:"For DaVinci Resolve Studio · Apple Silicon Mac",
+en:{m_e:"Four modules and an AI search",m_h:"Everything you need. Nothing in your way.",m_p:"Each module has its own green button and does one thing well. Here is what each one does.",vw1:"Edit",vw2:"less.",vw3:"Create",vw4:"more.",m1h:"Speedramp",m1g:"Speed up and slow down exactly where you want, no hand-made keyframes.",m1n:"In DaVinci the ramp lives in the same clip (Fusion). In Premiere it is applied with an RK effect, not native Time Remapping. Audio does not follow the curve.",m1p1:"Draw a speed curve: drag a point up or down to change the speed, sideways to change the moment.",m1p2:"Ready-made presets (Slow hit, Whip, Speed up, Slow down, Double hit…) and you can save your own.",m1p3:"The curve fits the clip’s duration, or you set the final duration in seconds.",m1p4:"“Keep the moments” pins each point to a frame of the video so the hit lands where you put it.",m1p5:"Automatic motion blur on fast parts and adjustable frame quality (Sharp, Blend or Optical Flow).",m1p6:"RK Whip transition on the cut and a button to undo the last ramp.",m2h:"Subtitles",m2g:"From voice to text on your timeline, in one click and without leaving your Mac.",m2n:"Subtitles and translation need macOS 26 or later.",m2p1:"One-click flow: it transcribes, translates if needed and writes the subtitles on your timeline.",m2p2:"You pick the audio language and the subtitle language: Spanish, English, Portuguese, French, German or Italian.",m2p3:"Transcription runs on your Mac, with no internet, and is saved so it is not repeated.",m2p4:"Review and fix the text in each box while keeping the timing; mark keywords with one click.",m2p5:"Cut styles (Social, Reels, Standard, Cinema), fonts, outline, shadow and word-by-word animation.",m2p6:"Remove filler words (uh, um…) from the text only, and export to SRT, VTT or word-level JSON.",m3h:"Music",m3g:"Cut to the beat: your song comes already marked on the timeline.",m3n:"Automix is only available in DaVinci Resolve for now.",m3p1:"Beat markers by bars, phrases (4 bars) or every beat, with drops in red.",m3p2:"“Hits” mode: marks only the song’s strong hits.",m3p3:"“Manual pulse”: type or tap the tempo, set the “1” at the cursor and fine-tune with a small offset.",m3p4:"Reverb ending: leaves an echo tail after the last sound so the song ends cleanly.",m3p5:"Audio effects and transitions between two songs (Tape stop, Rewind, Riser) with matched volume.",m3p6:"Automix: a DJ-style mix that matches the tempo of two songs without changing the pitch.",m4h:"Sounds",m4g:"Sound effects on your cuts and transitions, taken from your own library.",m4n:"You need your own sound-effects library; RK SUITE does not replace it.",m4p1:"You use your own sound-effects library: add your folders and RK reads them without copying your files.",m4p2:"It detects the ramps and transitions made with RK (exact frame, duration and intensity) and suggests 3 sounds for each.",m4p3:"You choose the amount (few, normal, many) and the volume (soft, normal, loud).",m4p4:"Smart trim: short lead-in, hit on the cut and a faded tail.",m4p5:"Sounds go to separate audio tracks, your clips are not touched, and you can undo the last batch.",m4p6:"Works with no internet; only the sounds actually used are imported into your project.",ai_e:"New · The star of RK SUITE",ai_h:"Search with EmbeddingGemma 2",ai_p:"Describe the scene in your own words and RK SUITE takes you to the exact frame inside your videos. Stop watching hours of footage.",ai_c1:"100% on your Mac",ai_c2:"Optional add-on",ai_c3:"Experimental",ai_pw:"Powered by EmbeddingGemma 2",ai_pws:"Open model from Google DeepMind (labeled Apache 2.0 on Hugging Face; Gemma terms may apply). It runs on your own Mac.",ai_f:"Illustrative example. Your videos are analyzed on your computer and nothing is uploaded to the internet.",ai_exh:"Try searching for things like…",ai_ex1:"“people smiling on the beach”",ai_ex2:"“drone over the volcano at sunrise”",ai_ex3:"“close-up of hands typing”",ai_w1h:"What it does",ai_w1p:"You type what you are looking for, in your own words, in Spanish or English. EmbeddingGemma 2 understands the meaning of what is in your videos and RK SUITE takes you to the frame, ready to insert into your timeline. It searches video only.",ai_w2h:"100% local and private",ai_w2p:"The AI runs entirely on your Mac. Your videos are not uploaded to the internet or copied: they are only indexed on your computer.",ai_w3h:"How to turn it on",ai_w3p:"It is an optional add-on installed from the RK SUITE panel. An installer opens in Terminal, shows you the licenses and asks you to type ACCEPT (ACEPTO if your Terminal is in Spanish) to continue. Then you add your folders and index them.",ai_w4h:"What you need",ai_w4p:"A Mac with Apple Silicon and macOS 14 or later. The add-on downloads about 2.4 GB. It is an <b>experimental</b> feature and is offered without warranty.",ai_tm:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",nw_b:"New",nw_t:"AI search with EmbeddingGemma 2, 100% local",eyebrow:"For DaVinci Resolve Studio and Premiere Pro (beta) · Apple Silicon Mac",q2:"What about Premiere Pro?",a2:"Yes. RK SUITE also has a panel for Adobe Premiere Pro, which is in beta: it may have rough edges and some features, like Automix, are DaVinci-only for now. In Premiere the ramp is applied with an RK effect, not native Time Remapping.",q7:"What is the EmbeddingGemma 2 search?",a7:"It is an optional, experimental add-on: you describe a scene in your own words and it takes you to the frame inside your videos. The AI runs 100% on your Mac and your videos are not uploaded to the internet. It needs Apple Silicon, macOS 14 or later and about a 2.4 GB download.",r2h:"DaVinci Resolve Studio 21 or Premiere Pro",r2p:"Resolve plugins do not work on the free version. The Premiere panel is in beta.",r4h:"AI search (optional)",r4p:"Apple Silicon and macOS 14 or later. Add-on of about 2.4 GB.",v_e:"See it in action",v_h:"30 seconds to get it all.",attr:"EmbeddingGemma and Gemma are trademarks of Google LLC. RK SUITE is an independent product and is not affiliated with or endorsed by Google.",n1:"What it does",n2:"How it works",n3:"Price",n4:"FAQ",
  h1:"Speed ramps, subtitles and music. In one click.",lead:"RK SUITE turns hours of editing into seconds. Made by an editor, designed so anyone can understand it.",
  buy:"Buy · 49.99 USD",buyw:"See price · 49.99 USD",how:"See what it does",t1:"One-time payment, no subscription",t2:"License for 2 Macs",t3:"Everything runs on your Mac",cap:"You draw the curve. Your clip speeds up and slows down exactly where you want.",
- m_e:"Four modules",m_h:"Everything you need. Nothing in your way.",m_p:"Each module does one thing and has one green button. The rest stays hidden until you need it.",
+ 
  c1h:"Speedramp",c1p:"Draw a speed curve and apply it to your clip. It fits the duration by itself and follows the rhythm of your edit.",
  c2h:"Subtitles",c2p:"Transcribe your audio, pick the language and write the subtitles on your timeline, with word-by-word animation.",
  c3h:"Music",c3p:"Mark beats and bars, mix two songs with matched tempo (Automix) and say goodbye with a final reverb.",
@@ -373,9 +537,9 @@ en:{v_e:"See it in action",v_h:"30 seconds to get it all.",ai_e:"Smart search",a
  s2h:"Open it in Resolve",s2p:"In Resolve go to Workspace › Workflow Integrations › RK SUITE.",s3h:"Press the green button",s3p:"Pick a module, tweak if you like and apply. You can always undo.",
  p_e:"RK SUITE license",p_s:"One payment. No subscription.",p1:"Works on <b>2 Macs</b> at once",p2:"All updates of version <b>1.x</b>",p3:"Key and installer <b>instantly</b>",p4:"Direct <b>email support</b>",
  buy2:"Buy now",buy2w:"Notify me when it opens",fine:"Secure payment. You get your key and the installer instantly.",finew:"The store opens very soon. Leave us your email and we will let you know.",
- r_h:"Before you buy",r1h:"Apple Silicon Mac",r1p:"M1, M2, M3, M4 or M5. macOS 12 or later.",r2h:"DaVinci Resolve Studio 21",r2p:"Resolve plugins do not work on the free version.",r3h:"Subtitles and translation",r3p:"They need macOS 26 or later. Everything else works from macOS 12.",
+ r_h:"Before you buy",r1h:"Apple Silicon Mac",r1p:"M1, M2, M3, M4 or M5. macOS 12 or later.",r3h:"Subtitles and translation",r3p:"They need macOS 26 or later. Everything else works from macOS 12.",
  f_h:"Frequently asked questions",q1:"Does it work with the free version of DaVinci Resolve?",a1:"No. Workflow Integration plugins only work in DaVinci Resolve Studio, Blackmagic's paid version.",
- q2:"What about Premiere Pro?",a2:"Today RK SUITE is for DaVinci Resolve. The Premiere Pro version is in testing and will come later.",
+ 
  q3:"Are my videos uploaded anywhere?",a3:"No. Everything runs on your Mac: your videos, audio and subtitles never leave your computer. Only your license is checked online.",
  q4:"What if I change Macs?",a4:"Your key works on 2 Macs. Deactivate one from the plugin and activate the new one whenever you like.",
  q5:"macOS says it cannot verify the installer",a5:"This is normal the first time: the installer is not signed with an Apple developer account. Go to System Settings › Privacy & Security, scroll to the installer notice and click “Open Anyway”. It is only asked once.",
@@ -433,12 +597,12 @@ document.querySelectorAll(".q button").forEach(function(b){b.addEventListener("c
 // búsqueda: escribe una consulta y aparecen los resultados
 (function(){
   var qt=el("qt"),res=el("res"),ths=res?res.querySelectorAll(".th"):[];if(!qt||!ths.length)return;
-  var Q={es:["personas sonriendo","dron sobre el volcán","atardecer en la playa"],en:["people smiling","drone over the volcano","sunset at the beach"]};
+  var Q={es:["personas sonriendo en la playa","dron sobre el volcán al amanecer","primer plano de manos escribiendo"],en:["people smiling on the beach","drone over the volcano at sunrise","close-up of hands typing"]};
   var G=[["#3b2f1a,#d98b3a 60%,#f1c27a","#1c2f3b,#3a8bd9 60%,#8fd3ff","#2a1c3b,#9a3ad9 60%,#e0a3ff"],["#22331a,#5fb04a 60%,#c4f0a0","#2f2a1a,#c9a23a 60%,#f1e0a0","#1a2a33,#3a9bb0 60%,#9ae0f0"],["#3b1f1a,#d9553a 60%,#ffb08f","#3b2a1a,#d98f3a 60%,#ffd49a","#2a1a3b,#7a3ad9 60%,#c8a3ff"]];
   var TC=[["00:12","02:48","05:03"],["01:30","04:11","07:25"],["03:05","06:40","09:12"]],SC=[["96%","91%","88%"],["94%","90%","85%"],["97%","92%","89%"]];
-  var qi=0,vis=true;
+  var qi=0,vis=true;for(var pi=0;pi<9;pi++){(new Image()).src="img/search-"+pi+".jpg"}
   var vo=("IntersectionObserver" in window)?new IntersectionObserver(function(e){vis=e[0].isIntersecting}):null;if(vo)vo.observe(qt);
-  function show(){ths.forEach(function(t,i){t.style.setProperty("--g","linear-gradient(135deg,"+G[qi%3][i]+")");t.querySelector("i").textContent=TC[qi%3][i];t.querySelector("s").textContent=SC[qi%3][i];setTimeout(function(){t.classList.add("on")},160*i)})}
+  function show(){ths.forEach(function(t,i){t.style.setProperty("--g","linear-gradient(135deg,"+G[qi%3][i]+")");t.style.setProperty("--img","url(img/search-"+((qi%3)*3+i)+".jpg)");t.querySelector("i").textContent=TC[qi%3][i];t.querySelector("s").textContent=SC[qi%3][i];setTimeout(function(){t.classList.add("on")},160*i)})}
   if(reduced){qt.textContent=Q[lang][0];ths.forEach(function(t){t.classList.add("on")});return}
   function type(text,done){var i=0;(function f(){if(!vis){setTimeout(f,400);return}qt.textContent=text.slice(0,++i);if(i<text.length)setTimeout(f,55+Math.random()*50);else setTimeout(done,350)})()}
   function cycle(){ths.forEach(function(t){t.classList.remove("on")});qt.textContent="";
