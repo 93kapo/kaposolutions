@@ -402,7 +402,7 @@ main.fx{opacity:0}
     <h1 id="h1" aria-label="Speed ramps, subtítulos y música. En un clic.">Speed ramps, subtítulos y música. <span class="lime">En un clic.</span></h1>
     <p class="lead rv" style="--d:5;margin-top:26px" data-i="lead">RK SUITE convierte horas de edición en segundos. Hecho por un editor, pensado para que cualquiera lo entienda.</p>
     <div class="cta rv" style="--d:6">
-      <a class="btn p" href="#precio" id="buy1" data-i="buy">Comprar · 49.99 USD</a>
+      <a class="btn p" href="https://www.creem.io/payment/prod_6S5mEEOpbHcmGFEH642Ya1" id="buy1" data-i="buy">Comprar · 49.99 USD</a>
       <a class="btn g" href="#modulos" data-i="how">Ver qué hace</a>
     </div>
     <div class="trust rv" style="--d:7">
@@ -561,7 +561,7 @@ main.fx{opacity:0}
         <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="p3">Llave e instalador <b>al instante</b></span></li>
         <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="p4">Soporte directo <b>por correo</b></span></li>
       </ul>
-      <a class="btn p" id="buy2" href="#" data-i="buy2">Comprar ahora</a>
+      <a class="btn p" id="buy2" href="https://www.creem.io/payment/prod_6S5mEEOpbHcmGFEH642Ya1" data-i="buy2">Comprar ahora</a>
       <p class="fine" id="fine" data-i="fine">Pago seguro. Recibes tu llave y el instalador al instante.</p>
     </div></div>
     <div>
@@ -667,7 +667,7 @@ function apply(){
 }
 function wireBuy(){
   var b=el("buy2"),b1=el("buy1");
-  if(CHECKOUT_URL){b.href=CHECKOUT_URL;b.target="_blank";b.rel="noopener";b1.href=CHECKOUT_URL;b1.target="_blank";b1.rel="noopener"}
+  if(CHECKOUT_URL){b.href=CHECKOUT_URL;b.removeAttribute("target");b1.href=CHECKOUT_URL;b1.removeAttribute("target")}   // mismo pestaña: el pago se abre aquí (algunos navegadores automáticos no siguen pestañas nuevas)
   else{b1.innerHTML=T[lang].buyw;b.innerHTML=T[lang].buy2w;b.href="mailto:"+SUPPORT+"?subject="+encodeURIComponent("RK SUITE · "+T[lang].buy2w);b.removeAttribute("target");el("fine").innerHTML=T[lang].finew}
 }
 el("lang").addEventListener("click",function(){
