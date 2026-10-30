@@ -7,10 +7,10 @@
 <meta name="format-detection" content="telephone=no">
 <script>document.documentElement.className+=" js"</script>
 <title>RK SUITE · Speed ramps, subtítulos, música y búsqueda con IA para DaVinci Resolve y Premiere Pro</title>
-<meta name="description" content="RK SUITE es el plugin para DaVinci Resolve Studio y Premiere Pro (beta) con speed ramps, subtítulos, marcadores de beats, música, sonidos y búsqueda con IA EmbeddingGemma 2, 100 % local. Pago único para 2 Macs.">
+<meta name="description" content="RK SUITE es el plugin para DaVinci Resolve Studio y Premiere Pro (beta) con speed ramps, subtítulos, marcadores de beats, música, sonidos y búsqueda con IA EmbeddingGemma 2, 100 % local. Para Mac (Apple Silicon) y Windows (beta). Pago único para 2 equipos.">
 <meta name="theme-color" content="#111216">
 <meta property="og:title" content="RK SUITE · Speed ramps, subtítulos, música y búsqueda con IA">
-<meta property="og:description" content="Speed ramps, subtítulos, música, sonidos y búsqueda con IA 100 % local. Plugin para DaVinci Resolve y Premiere Pro en Mac. 49.99 USD, pago único.">
+<meta property="og:description" content="Speed ramps, subtítulos, música, sonidos y búsqueda con IA 100 % local. Plugin para DaVinci Resolve en Mac y Windows (beta), y Premiere Pro en Mac. 49.99 USD, pago único.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="logo.png">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
@@ -375,8 +375,20 @@ main.fx{opacity:0}
   .orb{display:none}
   .mt::after{display:none}
 }
+.osw{display:inline-flex;align-items:center;gap:6px;padding:5px;margin-top:26px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);max-width:100%;flex-wrap:wrap}
+.osw .osw-l{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding:0 8px 0 14px}
+.osw button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font:600 15px var(--font);color:var(--mut);transition:background var(--m-base) var(--ease),color var(--m-base) var(--ease),box-shadow var(--m-base) var(--ease)}
+.osw button svg{width:18px;height:18px;fill:currentColor;flex:none}
+.osw button[aria-checked="true"]{background:var(--lime);color:var(--ink);box-shadow:0 6px 20px -8px rgba(183,243,107,.6)}
+.osw button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.osw.in-price{display:flex;justify-content:center;margin:0 0 20px}
+.osnote{margin-top:14px;max-width:560px;padding:12px 16px;border:1px solid var(--edge);border-radius:14px;background:rgba(183,243,107,.06);color:var(--txt);font-size:14.5px;line-height:1.5}
+.osnote[hidden]{display:none}
+.in-price+.osnote{margin:-6px 0 18px;max-width:none}
+@media (hover:hover) and (pointer:fine){.osw button[aria-checked="false"]:hover{color:var(--txt);background:rgba(255,255,255,.06)}}
+@media (max-width:520px){.osw{display:flex;width:100%}.osw .osw-l{width:100%;padding:6px 12px 0}.osw button{flex:1 1 0;justify-content:center}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"RK SUITE","description":"Plugin para DaVinci Resolve Studio y Premiere Pro (Mac con Apple Silicon): speed ramps, subtítulos, música, sonidos y búsqueda con IA local.","brand":{"@type":"Brand","name":"Kapo Solutions"},"offers":{"@type":"Offer","price":"49.99","priceCurrency":"USD","url":"https://kaposolutions.com/rk-suite/","availability":"https://schema.org/InStock"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"RK SUITE","description":"Plugin para DaVinci Resolve Studio y Premiere Pro (Mac con Apple Silicon y Windows 10/11 en beta): speed ramps, subtítulos, música, sonidos y búsqueda con IA local.","brand":{"@type":"Brand","name":"Kapo Solutions"},"offers":{"@type":"Offer","price":"49.99","priceCurrency":"USD","url":"https://kaposolutions.com/rk-suite/","availability":"https://schema.org/InStock"}}</script>
 </head>
 <body>
 <div id="prog" aria-hidden="true"></div>
@@ -401,6 +413,8 @@ main.fx{opacity:0}
     <a class="newchip rv" href="#busqueda" style="--d:2"><b data-i="nw_b">Nuevo</b><span data-i="nw_t">Búsqueda con IA EmbeddingGemma 2, 100 % local</span><em aria-hidden="true">→</em></a>
     <h1 id="h1" aria-label="Speed ramps, subtítulos y música. En un clic.">Speed ramps, subtítulos y música. <span class="lime">En un clic.</span></h1>
     <p class="lead rv" style="--d:5;margin-top:26px" data-i="lead">RK SUITE convierte horas de edición en segundos. Hecho por un editor, pensado para que cualquiera lo entienda.</p>
+    <div class="osw rv" style="--d:5" role="radiogroup" aria-label="Sistema operativo / Operating system"><span class="osw-l" data-i="os_l">Descargar para</span><button type="button" role="radio" aria-checked="true" data-os="mac"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>macOS</span></button><button type="button" role="radio" aria-checked="false" data-os="win"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4.4v7.1H3zM11.5 4.25 21 3v8.5h-9.5zM3 12.5h7.5v7.1L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></svg><span>Windows</span></button></div>
+    <p class="osnote rv" id="osnote" hidden></p>
     <div class="cta rv" style="--d:6">
       <a class="btn p" href="https://www.creem.io/payment/prod_6S5mEEOpbHcmGFEH642Ya1" id="buy1" data-i="buy">Comprar · 49.99 USD</a>
       <a class="btn g" href="#modulos" data-i="how">Ver qué hace</a>
@@ -561,6 +575,8 @@ main.fx{opacity:0}
         <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="p3">Llave e instalador <b>al instante</b></span></li>
         <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span data-i="p4">Soporte directo <b>por correo</b></span></li>
       </ul>
+      <div class="osw in-price" role="radiogroup" aria-label="Sistema operativo / Operating system"><span class="osw-l" data-i="os_l">Descargar para</span><button type="button" role="radio" aria-checked="true" data-os="mac"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>macOS</span></button><button type="button" role="radio" aria-checked="false" data-os="win"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4.4v7.1H3zM11.5 4.25 21 3v8.5h-9.5zM3 12.5h7.5v7.1L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></svg><span>Windows</span></button></div>
+      <p class="osnote" id="osnote2" hidden></p>
       <a class="btn p" id="buy2" href="https://www.creem.io/payment/prod_6S5mEEOpbHcmGFEH642Ya1" data-i="buy2">Comprar ahora</a>
       <p class="fine" id="fine" data-i="fine">Pago seguro. Recibes tu llave y el instalador al instante.</p>
     </div></div>
@@ -601,7 +617,7 @@ main.fx{opacity:0}
 (function(){
 "use strict";
 // ───────── Configuración: cuando la tienda esté activa, pon aquí el enlace de pago ─────────
-var CHECKOUT_URL = "https://www.creem.io/payment/prod_6S5mEEOpbHcmGFEH642Ya1";   // p. ej. el enlace de pago de Creem del producto (vacío = «Avísame» por correo)
+var CHECKOUT = {mac:"https://www.creem.io/payment/prod_6S5mEEOpbHcmGFEH642Ya1", win:""};   // enlace de pago de Creem por sistema (vacío = «Avísame» por correo). Para Windows: pega aquí el enlace cuando exista el producto
 var SUPPORT = "alexanderpineda07@gmail.com";
 
 var T = {
@@ -644,6 +660,44 @@ en:{m_e:"Four modules and an AI search",m_h:"Everything you need. Nothing in you
  q5:"macOS says it cannot verify the installer",a5:"This is normal the first time: the installer is not signed with an Apple developer account. Go to System Settings › Privacy & Security, scroll to the installer notice and click “Open Anyway”. It is only asked once.",
  q6:"How do I get help?",a6:"Write to us at",a6b:"We answer personally.",fo:"Made in Guatemala by REDKAM",l1:"Terms of use",l2:"Privacy",l3:"Refunds",l4:"Acceptable use",m_hint:"Tap a module to see the details.",ai_more:"How to turn it on and what you need",mn_open:"Open menu",mn_close:"Close menu",mn_nav:"Main menu"}
 };
+// ───────── Sistema operativo: textos que cambian cuando se elige Windows (lo demás es común) ─────────
+T.es.os_l="Descargar para";T.en.os_l="Download for";
+var W={
+es:{eyebrow:"Para DaVinci Resolve Studio · Windows 10 / 11 (beta)",t2:"Licencia para 2 equipos",t3:"Todo se procesa en tu PC",
+ m2g:"De la voz al texto en el timeline, en un clic y sin salir de tu PC.",m2n:"En Windows, la traducción de subtítulos llegará más adelante.",
+ m2p3:"La transcripción se hace en tu PC, sin internet, y se guarda para no repetirla.",ai_c1:"100 % en tu PC",
+ ai_pws:"Modelo abierto de Google DeepMind (etiquetado Apache 2.0 en Hugging Face; pueden aplicar los términos de Gemma). Corre en tu propio PC.",
+ ai_w2p:"La IA corre por completo en tu PC. Tus videos no se suben a internet ni se copian: solo se indexan en tu computadora.",
+ ai_w4p:"Windows 10 u 11 de 64 bits. Va rápido con una GPU NVIDIA RTX; sin GPU usa la CPU y es más lento. El complemento descarga unos 5 GB. Es una función <b>experimental</b> y se ofrece sin garantía.",
+ a7:"Es un complemento opcional y experimental: describes una escena con tus palabras y te lleva al cuadro dentro de tus videos. La IA corre 100 % en tu PC y tus videos no se suben a internet. Necesita Windows 10 u 11 de 64 bits (mejor con una GPU NVIDIA RTX) y unos 5 GB de descarga.",
+ a2:"Por ahora la versión de Windows es solo para DaVinci Resolve Studio. El panel de Premiere Pro (beta) está disponible solo para Mac.",
+ r1h:"PC con Windows 10 u 11",r1p:"64 bits. Se recomiendan 16 GB de RAM.",r2h:"DaVinci Resolve Studio 21.1 o superior",r2p:"Los plugins de Resolve no funcionan en la versión gratuita.",
+ r3p:"En Windows, la traducción de subtítulos llegará más adelante. El resto de los subtítulos está en pruebas.",
+ r4p:"Windows 10 u 11 de 64 bits. GPU NVIDIA RTX recomendada. Complemento de unos 5 GB.",p1:"Funciona en <b>2 equipos</b> a la vez",
+ a3:"No. Todo se procesa en tu PC: tus videos, tu audio y tus subtítulos no salen de tu computadora. Solo se comprueba tu licencia por internet.",
+ q4:"¿Qué pasa si cambio de PC?",a4:"Tu llave sirve en 2 equipos. Desactiva uno desde el plugin y activa el nuevo cuando quieras.",
+ q5:"Windows muestra una advertencia de SmartScreen",a5:"Puede pasar la primera vez: el instalador de Windows aún no lleva firma de editor. Pulsa «Más información» y luego «Ejecutar de todos modos». Solo se pide una vez.",
+ s1p:"Abre el instalador de Windows y sigue los pasos.",
+ wbuy1:"Avísame cuando abra · Windows",wbuy2:"Avísame · versión Windows",wfine:"La versión de Windows está en beta cerrada. Déjanos tu correo y te avisamos cuando abra la tienda.",
+ os_note:"<b>Versión Windows en beta.</b> Ya funciona: Speedramp y Búsqueda con IA. En pruebas: Subtítulos, Música y Sonidos."},
+en:{eyebrow:"For DaVinci Resolve Studio · Windows 10 / 11 (beta)",t2:"License for 2 computers",t3:"Everything runs on your PC",
+ m2g:"From voice to text on your timeline, in one click and without leaving your PC.",m2n:"On Windows, subtitle translation will come later.",
+ m2p3:"Transcription runs on your PC, with no internet, and is saved so it is not repeated.",ai_c1:"100% on your PC",
+ ai_pws:"Open model from Google DeepMind (labeled Apache 2.0 on Hugging Face; Gemma terms may apply). It runs on your own PC.",
+ ai_w2p:"The AI runs entirely on your PC. Your videos are not uploaded to the internet or copied: they are only indexed on your computer.",
+ ai_w4p:"64-bit Windows 10 or 11. Fast with an NVIDIA RTX GPU; without one it uses the CPU and is slower. The add-on downloads about 5 GB. It is an <b>experimental</b> feature and is offered without warranty.",
+ a7:"It is an optional, experimental add-on: you describe a scene in your own words and it takes you to the frame inside your videos. The AI runs 100% on your PC and your videos are not uploaded to the internet. It needs 64-bit Windows 10 or 11 (best with an NVIDIA RTX GPU) and about a 5 GB download.",
+ a2:"For now the Windows version is for DaVinci Resolve Studio only. The Premiere Pro panel (beta) is available on Mac only.",
+ r1h:"PC with Windows 10 or 11",r1p:"64-bit. 16 GB of RAM recommended.",r2h:"DaVinci Resolve Studio 21.1 or later",r2p:"Resolve plugins do not work on the free version.",
+ r3p:"On Windows, subtitle translation will come later. The rest of subtitles is in testing.",
+ r4p:"64-bit Windows 10 or 11. NVIDIA RTX GPU recommended. Add-on of about 5 GB.",p1:"Works on <b>2 computers</b> at once",
+ a3:"No. Everything runs on your PC: your videos, audio and subtitles never leave your computer. Only your license is checked online.",
+ q4:"What if I change PCs?",a4:"Your key works on 2 computers. Deactivate one from the plugin and activate the new one whenever you like.",
+ q5:"Windows shows a SmartScreen warning",a5:"It can happen the first time: the Windows installer does not carry a publisher signature yet. Click “More info” and then “Run anyway”. It is only asked once.",
+ s1p:"Open the Windows installer and follow the steps.",
+ wbuy1:"Notify me when it opens · Windows",wbuy2:"Notify me · Windows version",wfine:"The Windows version is in closed beta. Leave us your email and we will let you know when the store opens.",
+ os_note:"<b>Windows version in beta.</b> Working now: Speedramp and AI Search. Testing: Subtitles, Music and Sounds."}
+};
 var lang="es", reduced=false, el=function(i){return document.getElementById(i)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var raf=window.requestAnimationFrame||function(f){return setTimeout(function(){f(Date.now())},16)};
 try{reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
@@ -651,6 +705,10 @@ if(reduced)document.documentElement.classList.add("noanim");
 var fine=false;try{fine=window.matchMedia("(hover:hover) and (pointer:fine)").matches}catch(e){}
 try{var sv=localStorage.getItem("rk.lang");if(sv==="en"||sv==="es")lang=sv;else if((navigator.language||"").toLowerCase().indexOf("es")!==0)lang="en"}catch(e){}
 var root=document.documentElement;
+var os="mac";   // sistema elegido: ?os=win|mac en el enlace > lo que eligió antes > el sistema del visitante
+try{var qo=(location.search.match(/[?&]os=(mac|win)\b/)||[])[1],so=localStorage.getItem("rk.os"),ua=(navigator.userAgent||"")+" "+(navigator.platform||"");
+os=qo||(so==="mac"||so==="win"?so:(/Windows|Win32|Win64/i.test(ua)?"win":"mac"))}catch(e){}
+
 
 function words(){ // titular: palabra por palabra con máscara, la última frase resaltada
   var h=el("h1");h.textContent="";var parts=T[lang].h1.split(" "),cut=parts.length-3;
@@ -658,23 +716,32 @@ function words(){ // titular: palabra por palabra con máscara, la última frase
   h.setAttribute("aria-label",T[lang].h1);
 }
 function menuLabel(){var o=root.classList.contains("menu-open");el("burger").setAttribute("aria-label",T[lang][o?"mn_close":"mn_open"]);el("mnav").setAttribute("aria-label",T[lang].mn_nav)}
+function tx(k){var w=W[lang];return os==="win"&&w&&w[k]!==undefined?w[k]:T[lang][k]}   // texto según idioma y sistema
+function syncOS(){
+  root.setAttribute("data-os",os);
+  $$(".osw button").forEach(function(b){b.setAttribute("aria-checked",b.getAttribute("data-os")===os?"true":"false")});
+  ["osnote","osnote2"].forEach(function(id){var n=el(id);if(n){n.hidden=os!=="win";n.innerHTML=os==="win"?(tx("os_note")||""):""}});
+}
+function setOS(o){if(o!=="mac"&&o!=="win"||o===os)return;os=o;try{localStorage.setItem("rk.os",os)}catch(e){}apply()}
 function apply(){
   root.lang=lang;
-  $$("[data-i]").forEach(function(n){var k=n.getAttribute("data-i");if(T[lang][k]!==undefined)n.innerHTML=T[lang][k]});
+  $$("[data-i]").forEach(function(n){var k=n.getAttribute("data-i");if(tx(k)!==undefined)n.innerHTML=tx(k)});
   el("lang").textContent=lang==="es"?"EN":"ES";
-  words();wireBuy();menuLabel();
+  words();syncOS();wireBuy();menuLabel();
   document.title=lang==="es"?"RK SUITE · Speed ramps, subtítulos y música para DaVinci Resolve":"RK SUITE · Speed ramps, subtitles and music for DaVinci Resolve";
 }
 function wireBuy(){
-  var b=el("buy2"),b1=el("buy1");
-  if(CHECKOUT_URL){b.href=CHECKOUT_URL;b.removeAttribute("target");b1.href=CHECKOUT_URL;b1.removeAttribute("target")}   // mismo pestaña: el pago se abre aquí (algunos navegadores automáticos no siguen pestañas nuevas)
-  else{b1.innerHTML=T[lang].buyw;b.innerHTML=T[lang].buy2w;b.href="mailto:"+SUPPORT+"?subject="+encodeURIComponent("RK SUITE · "+T[lang].buy2w);b.removeAttribute("target");el("fine").innerHTML=T[lang].finew}
+  var b=el("buy2"),b1=el("buy1"),u=CHECKOUT[os];
+  if(u){b.href=u;b.removeAttribute("target");b1.href=u;b1.removeAttribute("target");b.innerHTML=T[lang].buy2;b1.innerHTML=T[lang].buy;el("fine").innerHTML=T[lang].fine}   // mismo pestaña: el pago se abre aquí (algunos navegadores automáticos no siguen pestañas nuevas)
+  else{var a1=tx("wbuy1")||T[lang].buyw,a2=tx("wbuy2")||T[lang].buy2w,mh="mailto:"+SUPPORT+"?subject="+encodeURIComponent("RK SUITE · "+(os==="win"?"Windows · ":"")+a2);
+    b1.innerHTML=a1;b.innerHTML=a2;b.href=mh;b1.href=mh;b.removeAttribute("target");b1.removeAttribute("target");el("fine").innerHTML=tx("wfine")||T[lang].finew}
 }
 el("lang").addEventListener("click",function(){
   lang=lang==="es"?"en":"es";try{localStorage.setItem("rk.lang",lang)}catch(e){}
   if(reduced){apply();return}
   var m=el("top");m.classList.add("fx");setTimeout(function(){apply();m.classList.remove("fx")},170);
 });
+$$(".osw button").forEach(function(b){b.addEventListener("click",function(){setOS(b.getAttribute("data-os"))})});
 el("yr").textContent=new Date().getFullYear();
 apply();
 
