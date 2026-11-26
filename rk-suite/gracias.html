@@ -24,6 +24,8 @@ h1{font-size:clamp(30px,8vw,44px);line-height:1.1;letter-spacing:-.02em;margin-b
 .card ol{padding-left:20px}
 a{color:var(--lime)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;margin-top:10px;border-radius:999px;background:var(--lime);color:#0b0d08;font-weight:650;text-decoration:none}
+.dls{display:grid;gap:4px;justify-items:stretch;margin-top:8px}.dls .btn{margin-top:6px;text-align:center;padding:10px 20px}.note{margin-top:10px}
+[hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}.ok svg{stroke-dashoffset:0}}
 </style>
 </head>
@@ -31,14 +33,24 @@ a{color:var(--lime)}
 <main>
   <div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
   <h1>¡Gracias por tu compra!</h1>
-  <p class="lead">Ya tienes RK SUITE. Revisa tu correo: ahí está tu llave de licencia y el instalador.</p>
+  <p class="lead">Ya tienes RK SUITE. Revisa tu correo: ahí está tu llave de licencia. Descarga el instalador de tu programa más abajo.</p>
   <div class="card"><h2>Cómo empezar</h2>
-    <ol><li>Abre el correo de Creem y descarga el instalador.</li><li>Instálalo con doble clic.</li><li>En DaVinci Resolve: Workspace › Workflow Integrations › RK SUITE.</li><li>Pega tu llave de licencia. Funciona en 2 Macs.</li></ol></div>
+    <ol><li>Abre el correo de Creem para ver tu llave de licencia y descarga el instalador de tu programa (botones de abajo).</li><li>Instálalo con doble clic.</li><li>En DaVinci Resolve: Workspace › Workflow Integrations › RK SUITE.</li><li>Pega tu llave de licencia. Funciona en 2 Macs.</li></ol></div>
+  <div class="card" id="descargas"><h2>Descargas</h2>
+    <p>Para Mac con Apple Silicon y macOS 15 o superior. Elige tu programa: cada descarga es un instalador distinto.</p>
+    <div class="dls"><a class="btn" href="https://license.kaposolutions.com/get/h_EjE6HJSTYg0m6f_wNcA1FAo875O4SozbJRrIUFa_4/RK_SUITE_Resolve_1.0.0-rc.6.dmg">Descargar para DaVinci Resolve Studio</a><a class="btn" href="https://license.kaposolutions.com/get/h_EjE6HJSTYg0m6f_wNcA1FAo875O4SozbJRrIUFa_4/RK_SUITE_Premiere_1.0.0-rc.6.dmg">Descargar para Premiere Pro (beta)</a><a class="btn" href="https://license.kaposolutions.com/get/h_EjE6HJSTYg0m6f_wNcA1FAo875O4SozbJRrIUFa_4/RK_SUITE_Premiere_1.0.0-rc.6.dmg">Descargar ambos</a></div>
+    <p class="note">Windows: todavía no hay versión. <a href="mailto:alexanderpineda07@gmail.com?subject=RK%20SUITE%20Windows">Avísame cuando esté</a>.</p>
+    <p class="note">macOS puede avisar que no puede verificar el instalador: es normal. Ajustes del Sistema › Privacidad y seguridad › Abrir de todos modos.</p></div>
+  <div class="card" id="movil" hidden><h2>¿Estás en el celular?</h2>
+    <p>El plugin es de escritorio: abre el correo de compra en tu Mac para descargarlo e instalarlo allí.</p></div>
   <div class="card"><h2>¿Usas Premiere Pro?</h2>
     <p>El panel de Premiere está en beta. Escríbenos a <a href="mailto:alexanderpineda07@gmail.com">alexanderpineda07@gmail.com</a> con tu llave y te damos acceso.</p></div>
   <div class="card"><h2>¿Algo no funciona?</h2>
-    <p>Responde a nuestro correo o escríbenos. Respondemos personalmente.</p></div>
+    <p>Responde a nuestro correo o escríbenos. Respondemos personalmente. Tienes 14 días de reembolso si no es para ti.</p></div>
+  <div class="card"><h2>Aviso de fotosensibilidad</h2>
+    <p>Los efectos de destello, negativo y flash de RK SUITE pueden producir imágenes parpadeantes. No los uses en contenido dirigido a público sensible; límite recomendado: máximo 3 destellos por segundo.</p></div>
   <a class="btn" href="./">Volver a RK SUITE</a>
 </main>
+<script>(function(){var p=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||"",u=navigator.userAgent||"";if(/Android|iPhone|iPad|iPod|Mobi/i.test(u)||(/Mac/i.test(p)&&(navigator.maxTouchPoints||0)>1))document.getElementById("movil").hidden=false})();</script>
 </body>
 </html>
